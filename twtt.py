@@ -1,6 +1,6 @@
 import csv
 import sys
-#import NLPlib
+import NLPlib
 
 
 #step 1-5
@@ -8,9 +8,12 @@ def tweet_tokenize():
     return
 
 #step6-9
-def tweet_tag():
+def tweet_tag(sentence):
     tagger = NLPlib.NLPlib()
-    
+    tokenized = tagger.tokenize(sentence)
+    tags = tagger.tag(sentence)
+    for i in range(len(tokenized)):
+        tokenized[i] += tags[i] 
     return
 
 if __name__ == '__main__':
@@ -22,7 +25,6 @@ if __name__ == '__main__':
         for row in reader:   # iterates the rows of the file in orders
             
             #The reader function will take each line of the file and make a list containing all that line's columns. 
-            
             #todo
             tweet_tokenize(row)
             tweet_tag(row)
