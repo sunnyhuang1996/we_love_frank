@@ -57,20 +57,29 @@ def find_end(text):
     
     for j in range(0,length):
         #Add end of sentenct mark for following situation
-        #case 1: period
-        if ("." == word_list[j][-1] and j<length-1):
+
+        # ecllipsis
+        if (".." == word_list[j][-2:]):
+            word_list[j] += " "
+            
+        #case 2: period
+        elif ("." == word_list[j][-1] and j<length-1):
             ps = re.search(r"[a-zA-Z]+", word_list[j+1])
             if not (((word_list[j]).lower() in abbr) and (((ps.group()).lower() in names) or (ps.group()[0].islower()))):
                     word_list[j] += "\n"
+            else:
+                word_list[j] += " "
                     
 
-        # case 2: ! and ?
+        # case 3: ! and ?
         elif (("?" == word_list[j][-1] or "!" == word_list[j][-1]) and j<length-1):
             ps = re.search(r"[a-zA-Z]+", word_list[j+1])
             if not (((ps.group()).lower() in names) or (ps.group()[0].islower())):
                     word_list[j] += "\n"
+            else:
+                word_list[j] += " "
 
-        # case 3: non-special word
+        # case 4: non-special word
         else:
             word_list[j] += " "
                 
