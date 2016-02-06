@@ -17,7 +17,9 @@ QU_RE = re.compile(r'\?+') #consecutive question marks
 EXC_RE = re.compile(r'\!+') #consecutive exclamation
 SEMIC_RE = re.compile(r';+') #consecutive semicolon
 CO_RE = re.compile(r':+') #consecutive colon
+COM_RE = re.compile(r',+') #consecutive comon
 END_RE = re.compile(r'(./.)')
+
 
 
 
@@ -56,53 +58,58 @@ def remove_first_cha(text):
 def find_end(text):
     """ Finding end of sentences based on the instruction of 4.2.4.
     of the Manning and Schutze text. replace end of sentence # with #/#
-    at end of each sentence """
+    at end of each sentence. Return a list of conponents sentence """
     
-    #place putative sentence boundaries after all occurrenceof .?!;:-
-    text = PER_RE.sub("./.", text)
-    text = QU_RE.sub("?/?", text)
-    text = EXC_RE.sub("!/!", text) #problem: what about !!!
-    text = SEMIC_RE.sub(";/;", text)
-    text = CO_RE.sub(":/:", text)
-
-    print "after replace symbols" + text
-    print "\n"
+    # replace consecutive puncuation with single one
+    text = PER_RE.sub(".", text)
+    text = QU_RE.sub("?", text)
+    text = EXC_RE.sub("!", text)
+    text = SEMIC_RE.sub(";", text)
+    text = CO_RE.sub(":", text)
+    text = COM_RE.sub(",", text)
 
     #move the boundary after following quotation marks, if any
     text = text.replace('"', "")
-
-      
     word_list = text.split(" ")# split text
-    print "after split"+str(word_list)
-    print "\n"
-
+    
     length = len(word_list) # measure length of word list in advance b/c we wanna use it many time
+    
     for j in range(0,length):
-        #Disqualify a period boundary in the following circumstances
-        if ("./." == word_list[j][-3:]):
-            #preceded by a known abbr. and followed by a capitalized name
-            if ((word_list[j][:-2]).lower() in abbr) and (j<length-1):# and (word_list[j+1] in names):
-                print "case 1.1"
-                word_list[j] = word_list[j][:-3] + "."   #replace ./. by .
+        #Add end of sentenct mark for following situation
+        #case 1: period
+        if ("." == word_list[j][-1] and j<length-1):
+            #case 1.1: if next word is not end up with mark like , 
+            if (word_list[j+1][-1].isalpha()):
+                #if not an abbr. and not followed by a name or next char is lowercase
+                if not (((word_list[j]).lower() in abbr) and (((word_list[j+1]).lower() in names) or (word_list[j+1][0].islower()))):
+                    word_list[j] += "\n"
+                    
+            #case 1.2: if next word is end up with mark like ,
+            else:
+                #if not an abbr. and not followed by a name or next char is lowercase
+                if not (((word_list[j]).lower() in abbr) and (((word_list[j+1][:-1]).lower() in names) or (word_list[j+1][0].islower()))):
+                    word_list[j] += "\n"
+                    
 
-            #if preceded by a known abbr and followed by lowercase.
-            elif (word_list[j][:-2].lower() in abbr) and word_list[j+1][0].islower() and (j<length-1):
-                print "case 1.2"
-                word_list[j] = word_list[j][:-3] + "."   #replace ./. by .
+        # case 2: ! and ?
+        elif (("?" == word_list[j][-1] or "!" == word_list[j][-1]) and j<length-1):
+            #case 2.1: if next word is not end up with mark like , 
+            if (word_list[j+1][-1].isalpha()):
+                # if not followed by a name or next char is lowercase
+                if (word_list[j+1][0].isupper()) and (word_list[j+1].lower() not in names):
+                    word_list[j] += "\n"
 
-        # Disqualify a boundary with a ? or ! if:
-        if ("?/?" == word_list[j][-3:] or "!/!" == word_list[j][-3:]):
-            print "case 2"
-            # if followed by a name or lowercase letter.
-            if ((word_list[j+1][0].islower()) or (word_list[j+1].lower() in names) and (j<length-1)):
-                word_list[j] = word_list[j][:-3] +  word_list[j][-1]  #replace ?/? by ? or replace !/! by !
+            #case 2.2: if next word is end up with mark like ,
+            else:
+                # if not followed by a name or next char is lowercase
+                if (word_list[j+1][0].isupper()) and (word_list[j+1][:-1].lower() not in names):
+                    word_list[j] += "\n"
 
-    #sentence_list
-    sen_list = (END_RE.sub("\n", " ".join(word_list))).split("\n")
-
-    if sen_list[-1]=="":
-        return sen_list[:-1]
-    return sen_list
+        # non-special word
+        else:
+            word_list[j] += " "
+                
+    return (END_RE.sub("\n", "".join(word_list))).split("\n")
           
 
 
