@@ -10,7 +10,14 @@ c = HTMLParser.HTMLParser()
 T_RE = re.compile(r'/')   #tags and attributions
 TAG_RE = re.compile(r'<[^>]+>')   #tags and attributions
 URL_RE = re.compile(r'((http|https)://|www)[a-zA-Z0-9.?/&=:]*')  #url
-FC_RE = re.compile(r'(@|#)+')  #first character 
+FC_RE = re.compile(r'(@|#)+')  #first character
+
+PER_RE = re.compile(r'\.+') #consecutive period
+QU_RE = re.compile(r'\?+') #consecutive question marks
+EXC_RE = re.compile(r'\!+') #consecutive exclamation
+SEMIC_RE = re.compile(r';+') #consecutive semicolon
+CO_RE = re.compile(r':+') #consecutive colon
+END_RE = re.compile(r'(./.)')
 
 
 
@@ -52,11 +59,11 @@ def find_end(text):
     at end of each sentence """
     
     #place putative sentence boundaries after all occurrenceof .?!;:-
-    text = text.replace(".", "./.")
-    text = text.replace("?", "?/?")
-    text = text.replace("!", "!/!") #problem: what about !!!
-    text = text.replace(";", ";/;")
-    text = text.replace(":", ":/:")
+    text = PER_RE.sub("./.", text)
+    text = QU_RE.sub("?/?", text)
+    text = EXC_RE.sub("!/!", text) #problem: what about !!!
+    text = SEMIC_RE.sub(";/;", text)
+    text = CO_RE.sub(":/:", text)
 
     print "after replace symbols" + text
     print "\n"
@@ -89,8 +96,14 @@ def find_end(text):
             # if followed by a name or lowercase letter.
             if ((word_list[j+1][0].islower()) or (word_list[j+1].lower() in names) and (j<length-1)):
                 word_list[j] = word_list[j][:-3] +  word_list[j][-1]  #replace ?/? by ? or replace !/! by !
+
+    #sentence_list
+    sen_list = (END_RE.sub("\n", " ".join(word_list))).split("\n")
+
+    if sen_list[-1]=="":
+        return sen_list[:-1]
+    return sen_list
           
-    return word_list
 
 
 def lists():
@@ -124,10 +137,10 @@ def tweet_tag(sentence):
     return sentence
 
 if __name__ == '__main__':
-    
-    #check the validity of the input argument
+    tweet = "Trouble in Prof. Mary, I see!! Hmm.... Iran??? Iran so far away. flockofseagullsweregeopoliticallycorrect."
+    """"#check the validity of the input argument
     if len(sys.argv) == 4:
-        test_data_set = range(5500*sys.argv[2], 5500*sys.argv[2]-1)
+        test_data_set = range(5500*sys.argv[2], 5500*sys.argv[2]-1)"""
     
     abbrrev = load_list('./Wordlists/abbrev.english')
     pn_abbr = load_list('./Wordlists/pn_abbrev.english')
@@ -137,7 +150,7 @@ if __name__ == '__main__':
     names = m_name + f_name + last_name
     abbr = abbrrev + pn_abbr      
     
-    with open(sys.argv[1], 'rb') as csvfile:
+    """with open(sys.argv[1], 'rb') as csvfile:
         reader = csv.reader(csvfile)   # opens the csv file
         output_file = open(sys.argv[2], 'wb')
         
@@ -146,13 +159,15 @@ if __name__ == '__main__':
                 #The reader function will take each line of the file and make a list containing all that line's columns. 
                 output_file.write('<A=' + line[0] + '>')
                 #Only keep the tweet, discard tweet time and usrname 
-                tweet = line[-1]
-                tweet = remove_url(tweet)
-                tweet = remove_tags(tweet)
-                tweet = convert_ascii(tweet)
-                tweet = remove_first_cha(tweet)
-                tweet = find_end(tweet)
-                tweet = tweet_tag(tweet)
+                tweet = line[-1]"""
+    tweet = remove_url(tweet)
+    tweet = remove_tags(tweet)
+    tweet = convert_ascii(tweet)
+    tweet = remove_first_cha(tweet)
+    tweet = find_end(tweet)
+    #tweet = tweet_tag(tweet)
+    print tweet
+    
 
-    input_file.close() 
-    output_file.close()
+    """input_file.close() 
+    output_file.close()"""
