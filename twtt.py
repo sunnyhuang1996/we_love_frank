@@ -58,29 +58,38 @@ def find_end(text):
     text = text.replace(";", ";/;")
     text = text.replace(":", ":/:")
 
+    print "after replace symbols" + text
+    print "\n"
+
     #move the boundary after following quotation marks, if any
     text = text.replace('"', "")
 
       
     word_list = text.split(" ")# split text
-    for j in range(0,len(word_list)):
+    print "after split"+str(word_list)
+    print "\n"
+
+    length = len(word_list) # measure length of word list in advance b/c we wanna use it many time
+    for j in range(0,length):
         #Disqualify a period boundary in the following circumstances
         if ("./." == word_list[j][-3:]):
             #preceded by a known abbr. and followed by a capitalized name
-            if word_list[j][:-3] in abbr and word_list[j+1] in names:
-                wl[j] = wl[j][:-3] + "."   #replace ./. by .
+            if ((word_list[j][:-2]).lower() in abbr) and (j<length-1):# and (word_list[j+1] in names):
+                print "case 1.1"
+                word_list[j] = word_list[j][:-3] + "."   #replace ./. by .
 
             #if preceded by a known abbr and followed by lowercase.
-            elif word_list[j+1][0].islower():
+            elif (word_list[j][:-2].lower() in abbr) and word_list[j+1][0].islower() and (j<length-1):
+                print "case 1.2"
                 word_list[j] = word_list[j][:-3] + "."   #replace ./. by .
 
         # Disqualify a boundary with a ? or ! if:
         if ("?/?" == word_list[j][-3:] or "!/!" == word_list[j][-3:]):
-            if (word_list[j+1][0].islower()) or (word_list[j+1] in names):
+            print "case 2"
+            # if followed by a name or lowercase letter.
+            if ((word_list[j+1][0].islower()) or (word_list[j+1].lower() in names) and (j<length-1)):
                 word_list[j] = word_list[j][:-3] +  word_list[j][-1]  #replace ?/? by ? or replace !/! by !
           
-
-    #merge word list back to string
     return word_list
 
 
@@ -120,12 +129,13 @@ if __name__ == '__main__':
     if len(sys.argv) == 4:
         test_data_set = range(5500*sys.argv[2], 5500*sys.argv[2]-1)
     
-    abbr = load_list('./Wordlists/abbrev.english')
+    abbrrev = load_list('./Wordlists/abbrev.english')
     pn_abbr = load_list('./Wordlists/pn_abbrev.english')
     m_name = load_list('./Wordlists/maleFirstNames.txt')
     f_name = load_list('./Wordlists/femaleFirstNames.txt')
     last_name = load_list('./Wordlists/lastNames.txt')    
-    names = m_name + f_name + last_name      
+    names = m_name + f_name + last_name
+    abbr = abbrrev + pn_abbr      
     
     with open(sys.argv[1], 'rb') as csvfile:
         reader = csv.reader(csvfile)   # opens the csv file
