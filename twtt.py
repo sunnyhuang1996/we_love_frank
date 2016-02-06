@@ -12,17 +12,6 @@ TAG_RE = re.compile(r'<[^>]+>')   #tags and attributions
 URL_RE = re.compile(r'((http|https)://|www)[a-zA-Z0-9.?/&=:]*')  #url
 FC_RE = re.compile(r'(@|#)+')  #first character
 
-PER_RE = re.compile(r'\.+') #consecutive period
-QU_RE = re.compile(r'\?+') #consecutive question marks
-EXC_RE = re.compile(r'\!+') #consecutive exclamation
-SEMIC_RE = re.compile(r';+') #consecutive semicolon
-CO_RE = re.compile(r':+') #consecutive colon
-COM_RE = re.compile(r',+') #consecutive comon
-END_RE = re.compile(r'(./.)')
-
-
-
-
 
 #step 1
 
@@ -60,14 +49,6 @@ def find_end(text):
     of the Manning and Schutze text. replace end of sentence # with #/#
     at end of each sentence. Return a list of conponents sentence """
     
-    # replace consecutive puncuation with single one
-    text = PER_RE.sub(".", text)
-    text = QU_RE.sub("?", text)
-    text = EXC_RE.sub("!", text)
-    text = SEMIC_RE.sub(";", text)
-    text = CO_RE.sub(":", text)
-    text = COM_RE.sub(",", text)
-
     #move the boundary after following quotation marks, if any
     text = text.replace('"', "")
     word_list = text.split(" ")# split text
@@ -78,52 +59,23 @@ def find_end(text):
         #Add end of sentenct mark for following situation
         #case 1: period
         if ("." == word_list[j][-1] and j<length-1):
-            #case 1.1: if next word is not end up with mark like , 
-            if (word_list[j+1][-1].isalpha()):
-                #if not an abbr. and not followed by a name or next char is lowercase
-                if not (((word_list[j]).lower() in abbr) and (((word_list[j+1]).lower() in names) or (word_list[j+1][0].islower()))):
-                    word_list[j] += "\n"
-                    
-            #case 1.2: if next word is end up with mark like ,
-            else:
-                #if not an abbr. and not followed by a name or next char is lowercase
-                if not (((word_list[j]).lower() in abbr) and (((word_list[j+1][:-1]).lower() in names) or (word_list[j+1][0].islower()))):
+            ps = re.search(r"[a-zA-Z]+", word_list[j+1])
+            if not (((word_list[j]).lower() in abbr) and (((ps.group()).lower() in names) or (ps.group()[0].islower()))):
                     word_list[j] += "\n"
                     
 
         # case 2: ! and ?
         elif (("?" == word_list[j][-1] or "!" == word_list[j][-1]) and j<length-1):
-            #case 2.1: if next word is not end up with mark like , 
-            if (word_list[j+1][-1].isalpha()):
-                # if not followed by a name or next char is lowercase
-                if (word_list[j+1][0].isupper()) and (word_list[j+1].lower() not in names):
+            ps = re.search(r"[a-zA-Z]+", word_list[j+1])
+            if not (((ps.group()).lower() in names) or (ps.group()[0].islower())):
                     word_list[j] += "\n"
 
-            #case 2.2: if next word is end up with mark like ,
-            else:
-                # if not followed by a name or next char is lowercase
-                if (word_list[j+1][0].isupper()) and (word_list[j+1][:-1].lower() not in names):
-                    word_list[j] += "\n"
-
-        # non-special word
+        # case 3: non-special word
         else:
             word_list[j] += " "
                 
-    return (END_RE.sub("\n", "".join(word_list))).split("\n")
+    return ("".join(word_list)).split("\n")
           
-
-
-def lists():
-    """
-    abbr = load_list('/u/cs401/Wordlists/abbrev.english')
-    pn_abbr = load_list('/u/cs401/Wordlists/pn_abbrev.english')
-    m_name = load_list('/u/cs401/Wordlists/maleFirstNames.txt')
-    f_name = load_list('/u/cs401/Wordlists/femaleFirstNames.txt')
-    last_name = load_list('/u/cs401/Wordlists/lastNames.txt')
-    """
-    #global abbr, name, pn_abbr
-  
-    
 
 def load_list(file_name):
     """
@@ -144,7 +96,7 @@ def tweet_tag(sentence):
     return sentence
 
 if __name__ == '__main__':
-    tweet = "Trouble in Prof. Mary, I see!! Hmm.... Iran??? Iran so far away. flockofseagullsweregeopoliticallycorrect."
+    tweet = "Trouble in Prof. Mary, I see!!!! Hmm.... Iran??? Iran so far away. flockofseagullsweregeopoliticallycorrect."
     """"#check the validity of the input argument
     if len(sys.argv) == 4:
         test_data_set = range(5500*sys.argv[2], 5500*sys.argv[2]-1)"""
@@ -173,7 +125,6 @@ if __name__ == '__main__':
     tweet = remove_first_cha(tweet)
     tweet = find_end(tweet)
     #tweet = tweet_tag(tweet)
-    print tweet
     
 
     """input_file.close() 
