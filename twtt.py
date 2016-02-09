@@ -11,6 +11,7 @@ T_RE = re.compile(r'/')   #tags and attributions
 TAG_RE = re.compile(r'<[^>]+>')   #tags and attributions
 URL_RE = re.compile(r'((http|https)://|www)[a-zA-Z0-9.?/&=:]*')  #url
 FC_RE = re.compile(r'(@|#)+')  #first character
+EXC_RE = re.compile(r'!!!!+') # more than 3 excalmatory mark
 
 
 #step 1
@@ -48,6 +49,9 @@ def find_end(text):
     """ Finding end of sentences based on the instruction of 4.2.4.
     of the Manning and Schutze text. replace end of sentence # with #/#
     at end of each sentence. Return a list of conponents sentence """
+
+    # transfer more than 3 excalmatory marks to !!!
+    text = EXC_RE.sub("!!!", text)
     
     #move the boundary after following quotation marks, if any
     text = text.replace('"', "")
