@@ -110,12 +110,16 @@ def EOS_split(sentence):
 def split_token(token):
     token = [" ".join(token.split()[:-1]), token.split()[-1]]
     #print(token)
-    token = filter(None, re.split(r'(\!)|(\.\.\.)|(\?)|(\#)|(\@)|(\$)|(\,\s)|(\")|(\'s)|(\')|(n\'t)|(\s)', token[0])) + \
+    token = filter(None, re.split(r'(,)(?=[\D])|(\!)|(\.\.\.)|(\?)|(\#)|(\@)|(\$)|(\")|(\'s)|(\')|(n\'t)|(\s)', token[0])) + \
             filter(None, re.split(r'(\!)|(\.\.\.)|(\?)|(\#)|(\@)|(\$)|(\,\s)|(\")|(\'s)|(\')|(n\'t)|(\.)|(\s)', token[1]))
+    
     return filter(lambda a: a != ' ', token)
+
+def my_split(token):
+    return filter(None, re.split(r'(,)(?=[\S])', token))
                   
 def tweet_tag(sentence):
-    sentence = my_split(sentence)
+    sentence = split_token(sentence)
     tags = tagger.tag(sentence)
     for i in range(len(sentence)):
         sentence[i] += '/'
@@ -125,15 +129,14 @@ def tweet_tag(sentence):
     return sentence
 
 def collapse_punc(sentence):
-    search_comma = re.findall( r'\/,\s', sentence)
-    sentence = re.sub(r'\/\,\s', '', sentence, len(search_comma) - 1) 
+    sentence = re.sub(r'\,\s\,\/', '', sentence)
     sentence = re.sub(r'\/\.\s', '', sentence)
     return sentence
 
 if __name__ == '__main__':
     #tweet = "Trouble in Prof. Mary, I see!!! Hmm... Mary??? Iran so far away. flockofseagullsweregeopoliticallycorrect."
-    test_data_set = range(5500*sys.argv[2], 5500*sys.argv[2]) + range(800000 + 5500*sys.argv[2], 5500*sys.argv[2]+800000)
-    
+    #test_data_set = range(5500*sys.argv[2], 5500*sys.argv[2]) + range(800000 + 5500*sys.argv[2], 5500*sys.argv[2]+800000)
+    test_data_set = [1,2,3,4]
     abbrrev = load_list('./Wordlists/abbrev.english')
     pn_abbr = load_list('./Wordlists/pn_abbrev.english')
     m_name = load_list('./Wordlists/maleFirstNames.txt')
@@ -146,11 +149,11 @@ if __name__ == '__main__':
     with open(sys.argv[1], 'rb') as csvfile:
         reader = csv.reader(csvfile)   # opens the csv file
         output_file = open(sys.argv[2], 'wb')
-        
+        line_count = 1
         for line in reader:   # iterates the rows of the file in orders
-            if line in test_data_set:
+            if line_count in test_data_set:
                 #The reader function will take each line of the file and make a list containing all that line's columns. 
-                output_file.write('<A=' + line[0] + '>')
+                output_file.write('<A=' + line[0] + '>\n')
                 #Only keep the tweet, discard tweet time and usrname 
                 tweet = line[-1]
                 tweet = remove_url(tweet)
@@ -162,7 +165,7 @@ if __name__ == '__main__':
                 for sentence in tweet:
                     sentence = tweet_tag(sentence) 
                     output_file.write(sentence)
-        
+                    output_file.write('\n')
+            line_count += 1
 
-    input_file.close() 
     output_file.close()
