@@ -120,9 +120,9 @@ class NLPlib:
 #comment everything below when done testing
 """
 o = NLPlib()
-s = "The mosquito bit the boy. "
+s = "The mosquito bit the boy."
 s = "Tiger Woods finished the big tournament at par "
-s = "The dog 's paw was bit. We blame the cat; is that fair? "
+s = "The dog 's paw was bit . We blame the cat; is that fair ? "
 v = o.tokenize(s)
 t = o.tag(v)
 for i in range(len(v)):

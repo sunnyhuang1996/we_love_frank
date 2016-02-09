@@ -100,13 +100,25 @@ def load_list(file_name):
 
     
 #step6-9
+def EOS_split(sentence):
+    """
+    help split end of sentence punctuation from the word
+    """
+    
+    return sentence[:-1] + filter(None, re.split(r'([a-zA-Z]+)', sentence[-1]))
+
+
 def tweet_tag(sentence):
-    tagger = NLPlib.NLPlib()
+    
+    
     tokenized = tagger.tokenize(sentence)
+    print ("tokenzied")
+    print (tokenized)
     tags = tagger.tag(sentence)
     for i in range(len(tokenized)):
-        tokenized[i] += tags[i] 
-    return sentence
+        tokenized[i] += '/'
+        tokenized[i] += tags[i]
+    return tokenized
 
 if __name__ == '__main__':
     tweet = "Trouble in Prof. Mary, I see!!!! Hmm.... Mary??? Iran so far away. flockofseagullsweregeopoliticallycorrect."
@@ -121,7 +133,7 @@ if __name__ == '__main__':
     last_name = load_list('./Wordlists/lastNames.txt')    
     names = m_name + f_name + last_name
     abbr = abbrrev + pn_abbr      
-    
+    tagger = NLPlib.NLPlib()
     """with open(sys.argv[1], 'rb') as csvfile:
         reader = csv.reader(csvfile)   # opens the csv file
         output_file = open(sys.argv[2], 'wb')
@@ -137,9 +149,10 @@ if __name__ == '__main__':
     tweet = convert_ascii(tweet)
     tweet = remove_first_cha(tweet)
     tweet = find_end(tweet)
-    #tweet = tweet_tag(tweet)
-    print tweet
-    
+
+    for sentence in tweet:
+        sentence = tweet_tag(sentence)    
+        print(sentence)
 
     """input_file.close() 
     output_file.close()"""
