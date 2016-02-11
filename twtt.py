@@ -27,7 +27,11 @@ def remove_tags(text):
 def convert_ascii(text): 
     """ Replace html character codes with ASCII equivalent
     """
-    return c.unescape(text)
+    try:
+        text = c.unescape(text)
+    except:
+        text = ""
+    return text
 
 
 #step 3
@@ -55,10 +59,9 @@ def find_end(text):
     
     #move the boundary after following quotation marks, if any
     text = text.replace('"', "")
-    word_list = text.split(" ")# split text
+    word_list = (text.strip()).split()# split text
     
     length = len(word_list) # measure length of word list in advance b/c we wanna use it many time
-    
     for j in range(0,length):
         #Add end of sentenct mark for following situation
 
@@ -67,22 +70,26 @@ def find_end(text):
             word_list[j] += " "
             
         #case 2: period
-        elif ("." == word_list[j][-1] and j<length-1):
+        elif (j<length-1 and "." == word_list[j][-1]):
             ps = re.search(r"[a-zA-Z]+", word_list[j+1])
-            if not (((word_list[j]).lower() in abbr) and (((ps.group()).lower() in names) or (ps.group()[0].islower()))):
-                    word_list[j] += "\n"
-            else:
-                word_list[j] += " "
+            if ps:
+                if not (((word_list[j]).lower() in abbr) and (((ps.group()).lower() in names) or (ps.group()[0].islower()))):
+                        word_list[j] += "\n"
+                else:
+                    word_list[j] += " "
                     
 
         # case 3: ! and ?
-        elif (("?" == word_list[j][-1] or "!" == word_list[j][-1]) and j<length-1):
-            ps = re.search(r"[a-zA-Z]+", word_list[j+1])
-            if not (((ps.group()).lower() in names) or (ps.group()[0].islower())):
-                    word_list[j] += "\n"
+        elif (j<length-1 and ("?" == word_list[j][-1] or "!" == word_list[j][-1])):
+            if word_list[j+1].isalpha():
+                ps = re.search(r"[a-zA-Z]+", word_list[j+1])
+                if ps:
+                    if not (((ps.group()).lower() in names) or (ps.group()[0].islower())):
+                        word_list[j] += "\n"
+                    else:
+                        word_list[j] += " "
             else:
-                word_list[j] += " "
-
+                word_list[j] += "\n"
         # case 4: non-special word
         else:
             word_list[j] += " "
@@ -108,6 +115,8 @@ def EOS_split(sentence):
     return splitted
 
 def split_token(token):
+    if not token.strip():
+        return list(token)    
     token = [" ".join(token.split()[:-1]), token.split()[-1]]
     #print(token)
     token = filter(None, re.split(r'(,)(?=[\D])|(\!)|(\.\.\.)|(\?)|(\#)|(\@)|(\$)|(\")|(\'s)|(\')|(n\'t)|(\s)', token[0])) + \
@@ -119,6 +128,7 @@ def my_split(token):
     return filter(None, re.split(r'(,)(?=[\S])', token))
                   
 def tweet_tag(sentence):
+    print("tweet tag   ---->> ", sentence)
     sentence = split_token(sentence)
     tags = tagger.tag(sentence)
     for i in range(len(sentence)):
@@ -135,23 +145,24 @@ def collapse_punc(sentence):
 
 if __name__ == '__main__':
     #tweet = "Trouble in Prof. Mary, I see!!! Hmm... Mary??? Iran so far away. flockofseagullsweregeopoliticallycorrect."
-    #test_data_set = range(5500*sys.argv[2], 5500*sys.argv[2]) + range(800000 + 5500*sys.argv[2], 5500*sys.argv[2]+800000)
-    test_data_set = [1,2,3,4]
-    abbrrev = load_list('./Wordlists/abbrev.english')
-    pn_abbr = load_list('./Wordlists/pn_abbrev.english')
-    m_name = load_list('./Wordlists/maleFirstNames.txt')
-    f_name = load_list('./Wordlists/femaleFirstNames.txt')
-    last_name = load_list('./Wordlists/lastNames.txt')    
+    group = int(sys.argv[2])    
+    test_data_set = range(5500*group, 5500*(group+1)) + range(800000 + 5500*group, 5500*(group+1)+ 800000)
+    abbrrev = load_list('/u/cs401/Wordlists/abbrev.english')
+    pn_abbr = load_list('/u/cs401/Wordlists/pn_abbrev.english')
+    m_name = load_list('/u/cs401/Wordlists/maleFirstNames.txt')
+    f_name = load_list('/u/cs401/Wordlists/femaleFirstNames.txt')
+    last_name = load_list('/u/cs401/Wordlists/lastNames.txt')    
     names = m_name + f_name + last_name
     abbr = abbrrev + pn_abbr      
     tagger = NLPlib.NLPlib()
-    
+ 
     with open(sys.argv[1], 'rb') as csvfile:
         reader = csv.reader(csvfile)   # opens the csv file
-        output_file = open(sys.argv[2], 'wb')
+        output_file = open(sys.argv[3], 'wb')
         line_count = 1
         for line in reader:   # iterates the rows of the file in orders
             if line_count in test_data_set:
+                print(line_count)
                 #The reader function will take each line of the file and make a list containing all that line's columns. 
                 output_file.write('<A=' + line[0] + '>\n')
                 #Only keep the tweet, discard tweet time and usrname 
@@ -167,5 +178,6 @@ if __name__ == '__main__':
                     output_file.write(sentence)
                     output_file.write('\n')
             line_count += 1
-
+  
     output_file.close()
+ 
