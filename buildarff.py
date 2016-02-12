@@ -95,8 +95,9 @@ def count_type(s, category):
 
 if __name__ == '__main__':
     #check the validity of the input argument
-    if len(sys.argv) == 3:
-        num_data_each_group = sys.argv[2]
+    if len(sys.argv[]) == 4:
+        num_data_each_group = sys.argv[3]
+    classrange = range(0, num_data_each_group) + range(5500, 5500+num_data_each_group)
     
     input_file = open(sys.argv[1], 'rb') #open the tweet file
     output_file = open(sys.argv[2], 'wb')   
@@ -138,25 +139,33 @@ if __name__ == '__main__':
     num_token = 0 #general token
     char_token = 0 #token of only character
     num_sen = 0
-    num_char = 0 
+    num_char = 0
+    tweet_count=1
 
     for line in input_file.readlines()[1:]:   # iterates the rows of the file in orders
         if line.strip()=="<A=0>" or line.strip()=="<A=4>":
-            try:
-                avg_len_sentence = float(num_token)/num_sen
-                avg_len_token = float(num_char)/char_token
-            except ZeroDivisionError:
-                avg_len_sentence=0
-                avg_len_token=0
-             
-            cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
-            output_file.write(str(cal)+"\n")
-            num_token = 0 #general token
-            char_token = 0 #token of only character
-            num_sen = 0
-            num_char = 0 
+            tweet_count+=1
+            if tweet_count in classrange:
+                print tweet_count + "------"
+                try:
+                    avg_len_sentence = float(num_token)/num_sen
+                    avg_len_token = float(num_char)/char_token
+                except ZeroDivisionError:
+                    avg_len_sentence=0
+                    avg_len_token=0
+                 
+                cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
+                output_file.write(str(cal)+"\n")
+                num_token = 0 #general token
+                char_token = 0 #token of only character
+                num_sen = 0
+                num_char = 0
+                
+            else:
+                continue
+            
          
-        else:
+        elif tweet_count in classrange:
             num_sen +=1
             cal = aggre_count(line)
             past_num = len(re.findall('((have)|(has)|(had))/[a-zA-Z ]+e(n|d)/', line)) #past time verb
