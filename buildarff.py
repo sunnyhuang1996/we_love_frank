@@ -7,10 +7,10 @@ tag = re.compile(r'/[a-zA-Z]+') #determine tags
 #===================category dict=======================
 ca_dict = {
 'FPP': ["I", "me", "my", "mine", "we", "us", "our", "ours"], #first person pronouns
-'FPP': ["you", "your", "yours", "u", "ur", "urs"], #second person pronouns
+'SPP': ["you", "your", "yours", "u", "ur", "urs"], #second person pronouns
 'TPP': ["he", "him", "his", "she", "her", "hers", "it", "its", "they", "them", "their", "theirs"], #third person pronouns
 'CC': ["CC"], #Coordinating conjunctions
-'PTV': ["VBD"], # Past-tense verbs
+'PTV': ["VBD", "VBN"], # Past-tense verbs
 'FTV': ["'ll", "will", "gonna"], #, "going to VB"] #future tense
 'CO': [","], # Commas
 'CSC': [":", ";"], #Colons and semi-colons
@@ -26,7 +26,7 @@ ca_dict = {
 "ic", "jk", "k", "ly", "ya", "nm", "np", "plz", "ru", "so", "tc", "tmi", "ym", "ur", "u", "sol"] # modern slang acronyms
 }
 
-ca_list = ["FPP", "FPP", 'TPP', 'CC', 'PTV', 'FTV', 'CO', 'CSC', 'DASH', 'PA', 'EL',
+ca_list = ["FPP", "SPP", 'TPP', 'CC', 'PTV', 'FTV', 'CO', 'CSC', 'DASH', 'PA', 'EL',
            'CN', 'PN', 'ADV', 'WW', 'MSA', 'upper'];
 #===================================================
 
@@ -55,8 +55,7 @@ def aggre_count(s, categories="all"):
             L.append(assign_cate(s, c))
             
     return L
-
-            
+    
 
 def assign_cate(s, category):
     '''determine which category of words is calling'''
@@ -64,14 +63,14 @@ def assign_cate(s, category):
     if category in ["FPP", "SPP", "TPP", "CSC", "DASH", "EL", "MSA"]:
         return count_word(s,category)
     #if tag
-    elif category in ["CC", "PTV", "CO", "PA", "CN", "PN", "ADV", "WW"]:
+    elif category in ["CC", "CO", "PA", "CN", "PN", "ADV", "WW", "PTV"]:
         return count_type(s,category)
     #if future tense
     elif category=="FTV":
         return (len(re.findall('going/VBG to/TO [a-zA-Z]+/VB', s)) + count_word(s,"FTV"))
     elif category=="upper":
         sp = s.split(" ")
-        return sum([c.isupper() for c in sp])
+        return sum([(c.isupper() and c.index("/")>2) for c in sp])
     
 
 def count_word(s,category):
@@ -81,19 +80,18 @@ def count_word(s,category):
     if category=="EL":
         return sum([s.count(word) for word in ca_dict[category]])
     elif category=="MSA":
-        return sum([s.count(" "+word+"/") for word in ca_dict[category]]) + sum([s.count(" "+word.upper()+"/") for word in ca_dict[category]])
+        return sum([s.count(word+"/") for word in ca_dict[category]]) + sum([s.count(word.upper()+"/") for word in ca_dict[category]])
     else:
         return sum([s.count(word+"/") for word in ca_dict[category]])
-
+        
 
 def count_type(s, category):
     '''
     count the total number of apperence tags in category in string s
     '''
-    return sum([s.count("/"+tag) for tag in ca_dict[category]])
-    
-  
-    
+    return sum([s.count("/"+tag+" ") for tag in ca_dict[category]])
+
+ 
 
 if __name__ == '__main__':
     
@@ -136,22 +134,29 @@ if __name__ == '__main__':
     #Average length of sentences (in tokens)
     #Average length of tokens, excluding punctuation tokens (in characters)
     #Number of sentences
-
-    num_token = 0
+    
+    
+    num_token = 0 #general token
+    char_token = 0 #token of only character
     num_sen = 0
-    num_char = 0
+    num_char = 0 
 
     for line in input_file.readlines():   # iterates the rows of the file in orders
         if line.strip()!="<A=0>" and line.strip()!="<A=4>":
             num_sen +=1
             cal = aggre_count(line)
-            num_token += len(line.split(" "))
+            past_num = len(re.findall('((have)|(has)|(had))/[a-zA-Z ]+e(n|d)/', line)) #past time verb
+            #futurn time verb
+            futurn_num = len(re.findall('going/VBG to/TO [a-zA-Z]+/VB', line))*2 + line.count("will") + line.count("'ll") + line.count("gonna")
+            num_token += len(line.split(" ")) - past_num - futurn_num #number of tokens (all kinds)
             line = tag.sub('', line)
+            char_token += len((only_alph.sub(' ', line)).split()) - past_num - futurn_num
             num_char += len(only_alph.sub('', line))
                 
     avg_len_sentence = float(num_token)/num_sen
-    avg_len_token = float(num_char)/num_token
+    avg_len_token = float(num_char)/char_token
     cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
+    #print cal
     #=================
                   
     
