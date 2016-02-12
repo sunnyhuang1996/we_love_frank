@@ -146,7 +146,7 @@ if __name__ == '__main__':
         if line.strip()=="<A=0>" or line.strip()=="<A=4>":
             tweet_count+=1
             if tweet_count in classrange:
-                print str(tweet_count) + "------" + line.strip()
+                #print str(tweet_count) + "------" + line.strip()
                 try:
                     avg_len_sentence = float(num_token)/num_sen
                     avg_len_token = float(num_char)/char_token
@@ -155,8 +155,8 @@ if __name__ == '__main__':
                     avg_len_token=0
                  
                 cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
-                print cal
-                output_file.write(str(cal)+"\n")
+                #print cal
+                output_file.write(",".join(cal) + ", "+ line[3] + "\n")
                 num_token = 0 #general token
                 char_token = 0 #token of only character
                 num_sen = 0
