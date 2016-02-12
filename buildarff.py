@@ -140,7 +140,7 @@ if __name__ == '__main__':
     char_token = 0 #token of only character
     num_sen = 0
     num_char = 0
-    tweet_count=1
+    tweet_count=0
 
     for line in input_file.readlines()[1:]:   # iterates the rows of the file in orders
         if line.strip()=="<A=0>" or line.strip()=="<A=4>":
