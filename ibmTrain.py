@@ -34,8 +34,26 @@ def convert_training_csv_to_watson_csv_format(input_csv_name, group_id, output_c
 	#	None
 	
 	#TODO: Fill in this function
-	
-	return
+	test_data_set = range(5500*group_id, 5500*(group_id+1)) + range(800000 + 5500*group_id, 5500*(group_id+1)+ 800000)
+
+	try:
+                csvfile = open(input_csv_name, 'rb')
+                reader = csv.reader(csvfile)   # opens the csv file
+                output_file = open(output_csv_name, 'wb')
+                line_count=1
+                for line in reader:
+                        if line_count in test_data_set:
+                                output_file.write(line)
+                        line_count++
+        except IOError:
+		print ("Could not read file:", csv_file)
+		sys.exit()
+		
+        finally:
+               csvfile.close()
+               output_file.close()
+               
+
 	
 def extract_subset_from_csv_file(input_csv_file, n_lines_to_extract, output_file_prefix='ibmTrain'):
 	# Extracts n_lines_to_extract lines from a given csv file and writes them to 
@@ -57,8 +75,31 @@ def extract_subset_from_csv_file(input_csv_file, n_lines_to_extract, output_file
 	#	None
 	
 	#TODO: Fill in this function
+
+	try:
+                csvfile = open(input_csv_file, 'rb')
+                reader = csv.reader(csvfile)   # opens the csv file
+                output_file = open(output_file_prefix, 'wb')
+                line_count=1
+                for line in reader:
+                        if line_count<=n_lines_to_extract:
+                                line = line.split()#get tweeter content and call it info
+                                info = (line[-1]).strip("\n")
+                                info = info.replace('"', '') #get rid of all "
+                                output_file.write(info + "," + line[0] + "\n")  #write info, class to csv
+                        line_count++
+                        else:
+                                break
+                        
+        except IOError:
+		print ("Could not read file:", csv_file)
+		sys.exit()
+		
+        finally:
+               csvfile.close()
+               output_file.close()
+
 	
-	return
 	
 def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 	# Creates a classifier using the NLClassifier service specified with username and password.
