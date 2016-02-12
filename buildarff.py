@@ -94,6 +94,7 @@ def count_type(s, category):
  
 
 if __name__ == '__main__':
+    
     #check the validity of the input argument
     if len(sys.argv) == 4:
         num_data_each_group = sys.argv[3]
@@ -128,13 +129,11 @@ if __name__ == '__main__':
                       '@attribute number_of_sentence numeric\n' +
                       '@attribute class numeric\n\n')
     
-
     #input_file = open('sample.twt', 'rb')
     #================
     #Average length of sentences (in tokens)
     #Average length of tokens, excluding punctuation tokens (in characters)
     #Number of sentences
-    
     
     num_token = 0 #general token
     char_token = 0 #token of only character
@@ -155,7 +154,9 @@ if __name__ == '__main__':
                     avg_len_token=0
                  
                 cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
-                #print cal
+                print cal
+                
+                print (str(cal)[1:-1]).replace(" ","") + ", "+ line[3] + "\n"
                 output_file.write((str(cal)[1:-1]).replace(" ","") + ", "+ line[3] + "\n")
                 num_token = 0 #general token
                 char_token = 0 #token of only character
@@ -183,6 +184,7 @@ if __name__ == '__main__':
         cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
         output_file.write((str(cal)[1:-1]).replace(" ","") + ", 4\n")
         print cal
+        print (str(cal)[1:-1]).replace(" ","") + ", 4\n"
     #=================
                   
     
