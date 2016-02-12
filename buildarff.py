@@ -144,8 +144,13 @@ if __name__ == '__main__':
         print line
         if line.strip()=="<A=0>" or line.strip()=="<A=4>":
             print "new tweet--------------"
-            avg_len_sentence = float(num_token)/num_sen
-            avg_len_token = float(num_char)/char_token
+            try:
+                avg_len_sentence = float(num_token)/num_sen
+                avg_len_token = float(num_char)/char_token
+            except ZeroDivisionError:
+                avg_len_sentence=0
+                avg_len_token=0
+             
             cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
             output_file.write(str(cal)+"\n")
             num_token = 0 #general token
