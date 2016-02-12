@@ -124,7 +124,8 @@ if __name__ == '__main__':
                       '@attribute average_length_sentence numeric\n' +
                       '@attribute average_length_token numeric\n' +
                       '@attribute number_of_sentence numeric\n' +
-                      '@attribute class numeric\n\n')
+                      '@attribute class {0,4}\n\n'+
+                      '@DATA\n')
     
     #input_file = open('sample.twt', 'rb')
     #================
