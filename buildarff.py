@@ -140,13 +140,12 @@ if __name__ == '__main__':
     num_sen = 0
     num_char = 0
     tweet_count=-1
-    classind = input_file.readlines()[0][3]
+    first_line=True
 
-    for line in input_file.readlines()[1:]:   # iterates the rows of the file in orders
+    for line in input_file.readlines():   # iterates the rows of the file in orders
         if line.strip()=="<A=0>" or line.strip()=="<A=4>":
-            tweet_count+=1
-            if tweet_count in classrange:
-                #print str(tweet_count) + "------" + line.strip()
+            tweet_count+=1  # the tweet_count th tweet
+            if (tweet_count in classrange) and (not first_line):
                 try:
                     avg_len_sentence = float(num_token)/num_sen
                     avg_len_token = float(num_char)/char_token
@@ -155,12 +154,16 @@ if __name__ == '__main__':
                     avg_len_token=0
                  
                 cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
-                output_file.write((str(cal)[1:-1]).replace(" ","") + ", "+ classind + "\n")
+                output_file.write((str(cal)[1:-1]).replace(" ","") + ", "+ line[3] + "\n")
                 num_token = 0 #general token
                 char_token = 0 #token of only character
                 num_sen = 0
                 num_char = 0
-                classind = line[3]
+                class_ind=line[3]
+                
+            elif first_line:
+                first_line=False
+                class_ind=line[3]
                 
             else:
                 continue
@@ -181,7 +184,8 @@ if __name__ == '__main__':
         avg_len_sentence = float(num_token)/num_sen
         avg_len_token = float(num_char)/char_token
         cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
-        output_file.write((str(cal)[1:-1]).replace(" ","") + ", "+ classind + "\n")
+        output_file.write((str(cal)[1:-1]).replace(" ","") + ", 4\n")
+        
     #=================
                   
     
@@ -189,4 +193,5 @@ if __name__ == '__main__':
     
     input_file.close()
     output_file.close()
+    #nrc saif NLP NRC Emotion Lexicon
 
