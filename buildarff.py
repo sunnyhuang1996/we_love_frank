@@ -152,16 +152,22 @@ if __name__ == '__main__':
             line = tag.sub('', line)
             char_token += len((only_alph.sub(' ', line)).split()) - past_num - futurn_num
             num_char += len(only_alph.sub('', line))
-                
+        else:
+            avg_len_sentence = float(num_token)/num_sen
+            avg_len_token = float(num_char)/char_token
+            cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
+            output_file.write(str(cal)+"\n")
+
+            
     avg_len_sentence = float(num_token)/num_sen
     avg_len_token = float(num_char)/char_token
     cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
-    #print cal
+    output_file.write(str(cal)+"\n")
     #=================
                   
     
     #write data
-    output_file.write('@data\n')
+    
     input_file.close()
     output_file.close()
 
