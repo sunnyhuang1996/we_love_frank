@@ -14,6 +14,7 @@
 #TODO: add necessary imports
 import csv  
 import requests
+from requests.auth import HTTPBasicAuth
 import json
 
 
@@ -88,7 +89,11 @@ def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 	#	This function should throw an exception if the create classifier call fails for any reason
 	#	or if the input csv file does not exist or cannot be read.
 	#
+	
+	url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1"
+	r = requests.get(url, auth=(username, password))	
 	csv_file = input_file_prefix+str(n)+'.csv'
+	files = {'file': open(, 'rb')}
 	try:
 		input_file = open(csv_file, 'rb')
 	except IOError:
@@ -132,6 +137,7 @@ if __name__ == "__main__":
 	# username = '<ADD USERNAME>'
 	# password = '<ADD PASSWORD>'
 	# create_classifier(username, password, n, input_file_prefix='ibmTrain')
+	create_classfier("5946518f-f870-4f75-be57-baa2ca0f4f89", "MZ8VMedaeStu", 500, input_file_prefix='ibmTrain')
 	'''
 	{
 	  "credentials": {
@@ -148,7 +154,7 @@ if __name__ == "__main__":
 	"name": "My Classifier",
 	"language": "en"
 	"created": "2015-05-28T18:01:57.393Z",
-	"url": "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1",
+	    "url": "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1",
 	"status": "Training",
 	"status_description": "The classifier instance is in its training phase, not yet ready to accept classify requests"
 	}
