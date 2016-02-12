@@ -12,6 +12,9 @@
 
 ###IMPORTS###################################
 #TODO: add necessary imports
+import csv  
+import requests
+import json
 
 
 ###HELPER FUNCTIONS##########################
@@ -85,9 +88,17 @@ def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 	#	This function should throw an exception if the create classifier call fails for any reason
 	#	or if the input csv file does not exist or cannot be read.
 	#
+	csv_file = input_file_prefix+str(n)+'.csv'
+	try:
+		input_file = open(csv_file, 'rb')
+	except IOError:
+		print ("Could not read file:", csv_file)
+		sys.exit()
 	
-	#TODO: Fill in this function
-	
+	with input_file:
+		reader = csv.reader(f)
+		for row in reader:
+			pass #do stuff here	
 	return
 	
 if __name__ == "__main__":
@@ -96,7 +107,7 @@ if __name__ == "__main__":
 	input_csv_name = '<ADD FILENAME HERE>'
 	
 	#DO NOT CHANGE THE NAME OF THIS FILE
-	output_csv_name 'training_11000_watson_style.csv'
+	output_csv_name ='training_11000_watson_style.csv'
 	
 	convert_training_csv_to_watson_csv_format(input_csv_name,output_csv_name)
 	
@@ -121,6 +132,24 @@ if __name__ == "__main__":
 	# username = '<ADD USERNAME>'
 	# password = '<ADD PASSWORD>'
 	# create_classifier(username, password, n, input_file_prefix='ibmTrain')
+	'''
+	{
+	  "credentials": {
+	    "url": "https://gateway.watsonplatform.net/natural-language-classifier/api",
+	    "username": "5946518f-f870-4f75-be57-baa2ca0f4f89",
+	    "password": "MZ8VMedaeStu"
+	  }
+	}
 	
+	curl -u "{username}":"{password}" -F training_data=@train.csv -F training_metadata="{\"language\":\"en\",\"name\":\"My Classifier\"}" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers"
 	
-	
+	{
+	"classifier_id": "10D41B-nlc-1",
+	"name": "My Classifier",
+	"language": "en"
+	"created": "2015-05-28T18:01:57.393Z",
+	"url": "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1",
+	"status": "Training",
+	"status_description": "The classifier instance is in its training phase, not yet ready to accept classify requests"
+	}
+	'''
