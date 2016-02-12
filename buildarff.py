@@ -6,24 +6,24 @@ tag = re.compile(r'/[a-zA-Z]+') #determine tags
 
 #===================category dict=======================
 ca_dict = {
-'FPP': ["I", "me", "my", "mine", "we", "us", "our", "ours"], #first person pronouns
-'SPP': ["you", "your", "yours", "u", "ur", "urs"], #second person pronouns
-'TPP': ["he", "him", "his", "she", "her", "hers", "it", "its", "they", "them", "their", "theirs"], #third person pronouns
+'FPP': ["I/PRP", "me/PRP", "my/PRP$", "mine/NN", "we/PRP", "us/PRP", "our/PRP$", "ours/PRP"], #first person pronouns
+'SPP': ["you/PRP", "your/PRP$", "yours/PRP", "u/PRP", "ur/NN", "urs/NNS"], #second person pronouns
+'TPP': ["he/PRP", "him/PRP", "his/PRP$", "she/PRP", "her/PRP$", "hers/PRP", "it/PRP", "its/PRP$", "they/PRP", "them/PRP", "their/PRP$", "theirs/PRP"], #third person pronouns
 'CC': ["CC"], #Coordinating conjunctions
 'PTV': ["VBD", "VBN"], # Past-tense verbs
-'FTV': ["'ll", "will", "gonna"], #, "going to VB"] #future tense
-'CO': [","], # Commas
-'CSC': [":", ";"], #Colons and semi-colons
-'DASH': ["-"], #Dashes
+'FTV': ["'/POS ll/NN", "will/NN", "gonna/VBG"], #, "going to VB"] #future tense
+'CO': [",/,"], # Commas
+'CSC': [":/", ";/"], #Colons and semi-colons
+'DASH': ["-/:"], #Dashes
 'PA': ["("], #Parentheses
 'EL': ["./:"], #Ellipses
 'CN': ["NN", "NNS"], # Common Nouns
 'PN': ["NNP", "NNPS"], #Proper Nouns
 'ADV': ["RB", "RBR", "RBS"], #adverbs
 'WW': ["WDT", "WP", "WP$", "WRB"], # wh-words
-'MSA': ["smh", "fwb", "lmfao", "lmao", "lms", "tbh", "rofl", "wtf", "bff", "wyd", "lylc", "brb", "atm", "imao", "sml", "btw",
-"bw", "imho", "fyi", "ppl", "sob", "ttyl", "imo", "ltr", "thx", "kk", "omg", "ttys", "afn", "bbs", "cya", "ez", "f2f", "gtr",
-"ic", "jk", "k", "ly", "ya", "nm", "np", "plz", "ru", "so", "tc", "tmi", "ym", "ur", "u", "sol"] # modern slang acronyms
+'MSA': ["smh/", "fwb/", "lmfao/", "lmao/", "lms/", "tbh/", "rofl/", "wtf/", "bff/", "wyd/", "lylc/", "brb/", "atm/", "imao/", "sml/", "btw/",
+"bw/", "imho/", "fyi/", "ppl/", "sob/", "ttyl/", "imo/", "ltr/", "thx/", "kk/", "omg/", "ttys/", "afn/", "bbs/", "cya/", "ez/", "f2f/", "gtr/",
+"ic/", "jk/", "k/", "ly/", "ya/", "nm/", "np/", "plz/", "ru/", "so/", "tc/", "tmi/", "ym/", "ur/", "u/", "sol/"] # modern slang acronyms
 }
 
 ca_list = ["FPP", "SPP", 'TPP', 'CC', 'PTV', 'FTV', 'CO', 'CSC', 'DASH', 'PA', 'EL',
@@ -77,12 +77,7 @@ def count_word(s,category):
     '''
     count the total number of apperence of words in category in string s
     '''
-    if category=="EL":
-        return sum([s.count(word) for word in ca_dict[category]])
-    elif category=="MSA":
-        return sum([s.count(word+"/") for word in ca_dict[category]]) + sum([s.count(word.upper()+"/") for word in ca_dict[category]])
-    else:
-        return sum([s.count(word+"/") for word in ca_dict[category]])
+    return sum([s.count(word) for word in ca_dict[category]])
         
 
 def count_type(s, category):
