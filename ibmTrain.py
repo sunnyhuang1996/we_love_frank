@@ -14,6 +14,7 @@
 #TODO: add necessary imports
 import csv  
 import requests
+from requests.auth import HTTPBasicAuth
 import json
 
 
@@ -34,8 +35,26 @@ def convert_training_csv_to_watson_csv_format(input_csv_name, group_id, output_c
 	#	None
 	
 	#TODO: Fill in this function
-	
-	return
+	test_data_set = range(5500*group_id, 5500*(group_id+1)) + range(800000 + 5500*group_id, 5500*(group_id+1)+ 800000)
+
+	try:
+                csvfile = open(input_csv_name, 'rb')
+                reader = csv.reader(csvfile)   # opens the csv file
+                output_file = open(output_csv_name, 'wb')
+                line_count=1
+                for line in reader:
+                        if line_count in test_data_set:
+                                output_file.write(line)
+                        line_count++
+        except IOError:
+		print ("Could not read file:", csv_file)
+		sys.exit()
+		
+        finally:
+               csvfile.close()
+               output_file.close()
+               
+
 	
 def extract_subset_from_csv_file(input_csv_file, n_lines_to_extract, output_file_prefix='ibmTrain'):
 	# Extracts n_lines_to_extract lines from a given csv file and writes them to 
@@ -57,8 +76,31 @@ def extract_subset_from_csv_file(input_csv_file, n_lines_to_extract, output_file
 	#	None
 	
 	#TODO: Fill in this function
+
+	try:
+                csvfile = open(input_csv_file, 'rb')
+                reader = csv.reader(csvfile)   # opens the csv file
+                output_file = open(output_file_prefix, 'wb')
+                line_count=1
+                for line in reader:
+                        if line_count<=n_lines_to_extract:
+                                line = line.split()#get tweeter content and call it info
+                                info = (line[-1]).strip("\n")
+                                info = info.replace('"', '') #get rid of all "
+                                output_file.write(info + "," + line[0] + "\n")  #write info, class to csv
+                        line_count++
+                        else:
+                                break
+                        
+        except IOError:
+		print ("Could not read file:", csv_file)
+		sys.exit()
+		
+        finally:
+               csvfile.close()
+               output_file.close()
+
 	
-	return
 	
 def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 	# Creates a classifier using the NLClassifier service specified with username and password.
@@ -88,7 +130,11 @@ def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 	#	This function should throw an exception if the create classifier call fails for any reason
 	#	or if the input csv file does not exist or cannot be read.
 	#
+	
+	url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1"
+	r = requests.get(url, auth=(username, password))	
 	csv_file = input_file_prefix+str(n)+'.csv'
+	files = {'file': open(, 'rb')}
 	try:
 		input_file = open(csv_file, 'rb')
 	except IOError:
@@ -132,6 +178,7 @@ if __name__ == "__main__":
 	# username = '<ADD USERNAME>'
 	# password = '<ADD PASSWORD>'
 	# create_classifier(username, password, n, input_file_prefix='ibmTrain')
+	create_classfier("5946518f-f870-4f75-be57-baa2ca0f4f89", "MZ8VMedaeStu", 500, input_file_prefix='ibmTrain')
 	'''
 	{
 	  "credentials": {
@@ -148,7 +195,7 @@ if __name__ == "__main__":
 	"name": "My Classifier",
 	"language": "en"
 	"created": "2015-05-28T18:01:57.393Z",
-	"url": "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1",
+	    "url": "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1",
 	"status": "Training",
 	"status_description": "The classifier instance is in its training phase, not yet ready to accept classify requests"
 	}
