@@ -95,7 +95,7 @@ def count_type(s, category):
 
 if __name__ == '__main__':
     #check the validity of the input argument
-    if len(sys.argv[]) == 4:
+    if len(sys.argv) == 4:
         num_data_each_group = sys.argv[3]
     classrange = range(0, num_data_each_group) + range(5500, 5500+num_data_each_group)
     
