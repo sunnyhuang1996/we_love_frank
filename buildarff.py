@@ -94,7 +94,6 @@ def count_type(s, category):
  
 
 if __name__ == '__main__':
-    
     #check the validity of the input argument
     if len(sys.argv) == 3:
         num_data_each_group = sys.argv[2]
@@ -141,8 +140,19 @@ if __name__ == '__main__':
     num_sen = 0
     num_char = 0 
 
-    for line in input_file.readlines():   # iterates the rows of the file in orders
-        if line.strip()!="<A=0>" and line.strip()!="<A=4>":
+    for line in input_file.readlines()[1:]:   # iterates the rows of the file in orders
+        
+        if line.strip()=="<A=0>" or line.strip()=="<A=4>":
+            avg_len_sentence = float(num_token)/num_sen
+            avg_len_token = float(num_char)/char_token
+            cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
+            output_file.write(str(cal)+"\n")
+            num_token = 0 #general token
+            char_token = 0 #token of only character
+            num_sen = 0
+            num_char = 0 
+         
+        else:
             num_sen +=1
             cal = aggre_count(line)
             past_num = len(re.findall('((have)|(has)|(had))/[a-zA-Z ]+e(n|d)/', line)) #past time verb
@@ -152,11 +162,6 @@ if __name__ == '__main__':
             line = tag.sub('', line)
             char_token += len((only_alph.sub(' ', line)).split()) - past_num - futurn_num
             num_char += len(only_alph.sub('', line))
-        else:
-            avg_len_sentence = float(num_token)/num_sen
-            avg_len_token = float(num_char)/char_token
-            cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
-            output_file.write(str(cal)+"\n")
 
             
     avg_len_sentence = float(num_token)/num_sen
@@ -170,4 +175,5 @@ if __name__ == '__main__':
     
     input_file.close()
     output_file.close()
+    #nrc saif NLP NRC Emotion Lexicon
 
