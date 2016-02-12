@@ -146,7 +146,7 @@ if __name__ == '__main__':
         if line.strip()=="<A=0>" or line.strip()=="<A=4>":
             tweet_count+=1
             if tweet_count in classrange:
-                print tweet_count + "------"
+                print str(tweet_count) + "------"
                 try:
                     avg_len_sentence = float(num_token)/num_sen
                     avg_len_token = float(num_char)/char_token
