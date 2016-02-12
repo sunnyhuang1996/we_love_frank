@@ -156,7 +156,7 @@ if __name__ == '__main__':
                  
                 cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
                 #print cal
-                output_file.write(",".join(str(cal)) + ", "+ line[3] + "\n")
+                output_file.write((str(cal)[1:-1]).replace(" ","") + ", "+ line[3] + "\n")
                 num_token = 0 #general token
                 char_token = 0 #token of only character
                 num_sen = 0
@@ -181,7 +181,7 @@ if __name__ == '__main__':
         avg_len_sentence = float(num_token)/num_sen
         avg_len_token = float(num_char)/char_token
         cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
-        output_file.write(str(cal)+"\n")
+        output_file.write((str(cal)[1:-1]).replace(" ","") + ", 4\n")
         print cal
     #=================
                   
