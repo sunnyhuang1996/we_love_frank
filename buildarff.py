@@ -97,7 +97,7 @@ if __name__ == '__main__':
     #check the validity of the input argument
     if len(sys.argv) == 4:
         num_data_each_group = sys.argv[3]
-    classrange = range(0, num_data_each_group) + range(5500, 5500+num_data_each_group)
+    classrange = range(0, int(num_data_each_group)) + range(5500, 5500+int(num_data_each_group))
     
     input_file = open(sys.argv[1], 'rb') #open the tweet file
     output_file = open(sys.argv[2], 'wb')   
