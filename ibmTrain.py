@@ -145,21 +145,22 @@ def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 
 	csv_file = input_file_prefix+str(n)+'.csv'
 	
-	matadata = {"language":"en","name":"Classifier " + str(n) }
+	metadata = {"language":"en","name":"Classifier " + str(n)}
 	with open('metadata.txt', 'w') as metadata_file:
-                json.dump(matadata, metadata_file)
+                json.dump(metadata, metadata_file)
 
 	try:
 		training_file = open(csv_file, 'rb')
 		files = {'training_data': training_file, 'training_metadata':metadata_file}
-                r = requests.get(url, files=files, auth=(username, password))
+		r = requests.post(url, files=files, auth=(username, password))
+		print(r.text)
                 training_file.close()
                 
 	except IOError:
 		print ("Could not read file:", csv_file)
 		sys.exit()
 	
-
+		
         	
 	return r
 	
