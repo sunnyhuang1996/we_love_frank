@@ -1,5 +1,7 @@
 import sys
 import re
+from collections import Counter
+
 
 only_alph = re.compile('[\W_]+') #leave only alphabet char
 tag = re.compile(r'/[a-zA-Z]+') #determine tags
