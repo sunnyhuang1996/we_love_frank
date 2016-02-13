@@ -1,6 +1,6 @@
 # ibmTrain.py
 # 
-# This file produces 11 classifiers using the NLClassifier IBM Service
+# This file produces 3 classifiers using the NLClassifier IBM Service
 # 
 # TODO: You must fill out all of the functions in this file following 
 # 		the specifications exactly. DO NOT modify the headers of any
@@ -16,6 +16,7 @@ import csv
 import requests
 from requests.auth import HTTPBasicAuth
 import json
+import sys
 
 
 ###HELPER FUNCTIONS##########################
@@ -44,15 +45,19 @@ def convert_training_csv_to_watson_csv_format(input_csv_name, group_id, output_c
                 line_count=1
                 for line in reader:
                         if line_count in test_data_set:
-                                output_file.write(line)
-                        line_count++
+                                info = (line[-1]).strip("\n")
+                                info = info.replace('"', '') #get rid of all "
+                                output_file.write(info + "," + line[0] + "\n")  #write info, class to csv
+                        line_count += 1
+                csvfile.close()
+                output_file.close()
+                
         except IOError:
-		print ("Could not read file:", csv_file)
+		print "Could not read file:", input_csv_name
 		sys.exit()
 		
-        finally:
-               csvfile.close()
-               output_file.close()
+        
+
                
 
 	
@@ -80,25 +85,28 @@ def extract_subset_from_csv_file(input_csv_file, n_lines_to_extract, output_file
 	try:
                 csvfile = open(input_csv_file, 'rb')
                 reader = csv.reader(csvfile)   # opens the csv file
-                output_file = open(output_file_prefix, 'wb')
-                line_count=1
-                for line in reader:
-                        if line_count<=n_lines_to_extract:
+                output_file = open(output_file_prefix+str(n_lines_to_extract)+'.csv', 'wb')
+                line_count = 1
+                test_data_set = range(1, n_lines_to_extract+1) + range(5500, 5501 + n_lines_to_extract)
+                
+                for line in reader:   
+                        if line_count in test_data_set:
                                 line = line.split()#get tweeter content and call it info
                                 info = (line[-1]).strip("\n")
                                 info = info.replace('"', '') #get rid of all "
                                 output_file.write(info + "," + line[0] + "\n")  #write info, class to csv
-                        line_count++
+                                line_count += 1
                         else:
                                 break
-                        
+                csvfile.close()
+                output_file.close()
+                
         except IOError:
-		print ("Could not read file:", csv_file)
+		print ("Could not read file:", input_csv_file)
 		sys.exit()
 		
-        finally:
-               csvfile.close()
-               output_file.close()
+        
+
 
 	
 	
@@ -132,40 +140,46 @@ def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 	#
 	
 	url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1"
-	r = requests.get(url, auth=(username, password))	
+
 	csv_file = input_file_prefix+str(n)+'.csv'
-	files = {'file': open(, 'rb')}
+	
+	matadata = {"language":"en","name":"Classifier " + str(n) }
+	with open('metadata.txt', 'w') as metadata_file:
+                json.dump(matadata, metadata_file)
+
 	try:
-		input_file = open(csv_file, 'rb')
+		training_file = open(csv_file, 'rb')
+		files = {'training_data': training_file, 'training_metadata':metadata_file}
+                r = requests.get(url, files=files, auth=(username, password))
+                training_file.close()
+                
 	except IOError:
 		print ("Could not read file:", csv_file)
 		sys.exit()
 	
-	with input_file:
-		reader = csv.reader(f)
-		for row in reader:
-			pass #do stuff here	
-	return
+
+        	
+	return r
 	
 if __name__ == "__main__":
 	
 	### STEP 1: Convert csv file into two-field watson format
-	input_csv_name = '<ADD FILENAME HERE>'
-	
+        
+	input_csv_name = '/u/cs401/A1/tweets/training.1600000.processed.noemoticon.csv'
 	#DO NOT CHANGE THE NAME OF THIS FILE
-	output_csv_name ='training_11000_watson_style.csv'
+	output_csv_name ='training_11000_watson_style.csv'	
+	convert_training_csv_to_watson_csv_format(input_csv_name, 2, output_csv_name);
 	
-	convert_training_csv_to_watson_csv_format(input_csv_name,output_csv_name)
 	
+	### STEP 2: Save 3 subsets in the new format into ibmTrain#.csv files
 	
-	### STEP 2: Save 11 subsets in the new format into ibmTrain#.csv files
-	
-	#TODO: extract all 11 subsets and write the 11 new ibmTrain#.csv files
+	#TODO: extract all 3 subsets and write the 11 new ibmTrain#.csv files
 	#
 	# you should make use of the following function call:
 	#
-	# n_lines_to_extract = 500
-	# extract_subset_from_csv_file(input_csv,n_lines_to_extract)
+	subset = [500, 2500, 5000]
+	for n_lines_to_extract in subset:
+                extract_subset_from_csv_file(output_csv_name,n_lines_to_extract)
 	
 	### STEP 3: Create the classifiers using Watson
 	
@@ -174,29 +188,10 @@ if __name__ == "__main__":
 	# 
 	#
 	# you should make use of the following function call
-	# n = 500
-	# username = '<ADD USERNAME>'
-	# password = '<ADD PASSWORD>'
-	# create_classifier(username, password, n, input_file_prefix='ibmTrain')
-	create_classfier("5946518f-f870-4f75-be57-baa2ca0f4f89", "MZ8VMedaeStu", 500, input_file_prefix='ibmTrain')
-	'''
-	{
-	  "credentials": {
-	    "url": "https://gateway.watsonplatform.net/natural-language-classifier/api",
-	    "username": "5946518f-f870-4f75-be57-baa2ca0f4f89",
-	    "password": "MZ8VMedaeStu"
-	  }
-	}
-	
-	curl -u "{username}":"{password}" -F training_data=@train.csv -F training_metadata="{\"language\":\"en\",\"name\":\"My Classifier\"}" "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers"
-	
-	{
-	"classifier_id": "10D41B-nlc-1",
-	"name": "My Classifier",
-	"language": "en"
-	"created": "2015-05-28T18:01:57.393Z",
-	    "url": "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1",
-	"status": "Training",
-	"status_description": "The classifier instance is in its training phase, not yet ready to accept classify requests"
-	}
-	'''
+
+	username = "5946518f-f870-4f75-be57-baa2ca0f4f89"
+	password = "MZ8VMedaeStu"
+
+	for n in subset:
+                create_classfier(username, password, n, input_file_prefix='ibmTrain')
+
