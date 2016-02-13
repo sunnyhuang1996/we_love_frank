@@ -94,8 +94,7 @@ def extract_subset_from_csv_file(input_csv_file, n_lines_to_extract, output_file
                         if line_count in test_data_set:
                                 print line
                                 #line = line.split()#get tweeter content and call it info
-                                info = (line[-1]).strip("\n")
-                                info = info.replace('"', '') #get rid of all "
+                                info = line[-1].replace('"', '') #get rid of all "
                                 output_file.write(info + "," + line[0] + "\n")  #write info, class to csv
                                 line_count += 1
                         else:
@@ -151,6 +150,7 @@ def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 
 	try:
 		training_file = open(csv_file, 'rb')
+		metadata = {"language":"en","name":"Classifier " + str(n)}
 		files = {'training_data': training_file, 'training_metadata':metadata_file}
 		r = requests.post(url, files=files, auth=(username, password))
 		print(r.text)
