@@ -11,7 +11,7 @@
 #		on CDF). You may find json, request, or pycurl helpful.
 #		You may also find it helpful to reuse some of your functions from ibmTrain.py.
 #
-# -*- coding: utf-8 -*-
+
 import requests
 from requests.auth import HTTPBasicAuth
 import json
@@ -134,7 +134,7 @@ def classify_all_texts(username,password,input_csv_name):
         #       and the confidences of all the possible classes (ie the same
         #       format as returned by classify_single_text)
         #       Format example:
-        #              {‘classifiername’:
+        #              {'classifiername':
         #                      [
         #                              {'top_class': 'class_name',
         #                              'classes': [
@@ -146,11 +146,11 @@ def classify_all_texts(username,password,input_csv_name):
         #                              ...
         #                              }
         #                      ]
-        #              , ‘classifiername2’:
+        #              , 'classifiername2':
         #                      [
-        #                      …      
+        #                      ...      
         #                      ]
-        #              …
+        #              ...
         #              }
         #
         # Error Handling:
