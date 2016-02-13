@@ -39,8 +39,8 @@ def get_classifier_ids(username="5946518f-f870-4f75-be57-baa2ca0f4f89",password=
 		url = 'https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers'
 		result = requests.get(url, auth=(username, password))
 		print(result.text)
-		i = result.index('[')
-		return result[i+1: -2]
+		#i = result.index('[')
+		#return result[i+1: -2]
 	except:
 		print("there is an error")
 

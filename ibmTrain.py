@@ -149,7 +149,7 @@ def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 
 	try:
 		training_file = open(csv_file, 'rb')
-		meta_file = open('metadata.txt', 'r')
+		meta_file = open('metadata.txt', 'rb')
 		files = {'training_data': training_file, 'training_metadata':meta_file}
 		r = requests.post(url, files=files, auth=(username, password))
 		print(r.text)
@@ -161,7 +161,7 @@ def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 	
 		
         	
-	return r
+	return r.text
 	
 if __name__ == "__main__":
 	
