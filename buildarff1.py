@@ -145,6 +145,7 @@ if __name__ == '__main__':
     first_line=True
 
     for line in input_file.readlines():   # iterates the rows of the file in orders
+        print line
         if line.strip()=="<A=0>" or line.strip()=="<A=4>":
             tweet_count+=1  # the tweet_count th tweet
             if (tweet_count in classrange) and (not first_line):
