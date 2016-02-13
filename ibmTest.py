@@ -11,7 +11,7 @@
 #		on CDF). You may find json, request, or pycurl helpful.
 #		You may also find it helpful to reuse some of your functions from ibmTrain.py.
 #
-
+# -*- coding: utf-8 -*-
 import requests
 from requests.auth import HTTPBasicAuth
 import json
@@ -101,7 +101,9 @@ def classify_single_text(username,password,classifier_id,text):
 	#
 	# Error Handling:
 	#	This function should throw an exception if the classify call fails for any reason 
-	#
+	#	
+	
+	
 	
 	#TODO: Fill in this function
 	
