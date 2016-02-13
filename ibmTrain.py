@@ -45,10 +45,11 @@ def convert_training_csv_to_watson_csv_format(input_csv_name, group_id, output_c
                 line_count=1
                 for line in reader:
                         if line_count in test_data_set:
-                                print line
-                                info = (line[-1]).strip("\n")
-                                info = info.replace('"', '') #get rid of all "
-                                output_file.write(info + "," + line[0] + "\n")  #write info, class to csv
+				print line
+				info = (line[-1]).strip("\n")
+				info = info.strip()
+				info = info.replace('"', '') #get rid of all "
+				output_file.write(info + "," + line[0] + "\n")  #write info, class to csv
                         line_count += 1
                 csvfile.close()
                 output_file.close()
@@ -92,10 +93,10 @@ def extract_subset_from_csv_file(input_csv_file, n_lines_to_extract, output_file
                 
                 for line in csvfile.readlines():   
                         if line_count in test_data_set:
-                                output_file.write(line)  #write info, class to csv
+                                output_file.write(" ".join(line.split()))  #write info, class to csv
                                 line_count += 1
                         else:
-                                break
+                                continue
                 csvfile.close()
                 output_file.close()
                 
