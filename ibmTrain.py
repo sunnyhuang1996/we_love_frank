@@ -85,12 +85,12 @@ def extract_subset_from_csv_file(input_csv_file, n_lines_to_extract, output_file
 
 	try:
                 csvfile = open(input_csv_file, 'rb')
-                reader = csv.reader(csvfile)   # opens the csv file
+
                 output_file = open(output_file_prefix+str(n_lines_to_extract)+'.csv', 'wb')
                 line_count = 1
                 test_data_set = range(1, n_lines_to_extract+1) + range(5500, 5501 + n_lines_to_extract)
                 
-                for line in reader:   
+                for line in csvfile.readlines():   
                         if line_count in test_data_set:
                                 output_file.write(line)  #write info, class to csv
                                 line_count += 1
