@@ -145,12 +145,12 @@ def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 	
 	metadata = {"language":"en","name":"Classifier " + str(n)}
 	with open('metadata.txt', 'w') as metadata_file:
-                json.dump(metadata, metadata_file)
+                metadata_file.write(dumps(metadata, metadata_file, indent=4))
 
 	try:
 		training_file = open(csv_file, 'rb')
-		metadata = {"language":"en","name":"Classifier " + str(n)}
-		files = {'training_data': training_file, 'training_metadata':metadata_file}
+		meta_file = open('metadata.txt', 'r')
+		files = {'training_data': training_file, 'training_metadata':meta_file}
 		r = requests.post(url, files=files, auth=(username, password))
 		print(r.text)
                 training_file.close()
