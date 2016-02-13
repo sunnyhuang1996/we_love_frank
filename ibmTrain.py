@@ -95,7 +95,7 @@ def extract_subset_from_csv_file(input_csv_file, n_lines_to_extract, output_file
                 
                 for line in csvfile.readlines():   
                         if line_count in test_data_set:
-                                output_file.write(" ".join(line.split()))  #write info, class to csv
+                                output_file.write(" ".join(line.split()) + "\n")  #write info, class to csv
                                 line_count += 1
                         else:
                                 continue
