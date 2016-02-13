@@ -13,9 +13,8 @@
 #
 
 import requests
+from requests.auth import HTTPBasicAuth
 import json
-#import urllib
-#import urllib2
 
 def get_classifier_ids(username="5946518f-f870-4f75-be57-baa2ca0f4f89",password="MZ8VMedaeStu"):
 	# Retrieves a list of classifier ids from a NLClassifier service 
@@ -37,13 +36,13 @@ def get_classifier_ids(username="5946518f-f870-4f75-be57-baa2ca0f4f89",password=
 	#TODO: Fill in this function
 	
         try:
-                url = 'https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers'
-                values = { 'username': username,'password': password }
-                result = requests.get(url, auth=(username, password)).content
-                i = result.index('[')
-                return result[i+1: -2]
-        except:
-                print("there is an error")
+		url = 'https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers'
+		result = requests.get(url, auth=(username, password))
+		print(result.text)
+		#i = result.index('[')
+		#return result[i+1: -2]
+	except:
+		print("there is an error")
 
 
 def assert_all_classifiers_are_available(username, password, classifier_id_list):
@@ -65,14 +64,14 @@ def assert_all_classifiers_are_available(username, password, classifier_id_list)
 	#
 	
 	#TODO: Fill in this function
-
+	'''
 	for claf in classifier_id_list:
                 try:
                         url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/" + claf
                         r = requests.get('https://api.github.com/events')
                         r.json()
                 
-	
+	'''
 	return
 
 def classify_single_text(username,password,classifier_id,text):
@@ -102,7 +101,9 @@ def classify_single_text(username,password,classifier_id,text):
 	#
 	# Error Handling:
 	#	This function should throw an exception if the classify call fails for any reason 
-	#
+	#	
+	
+	
 	
 	#TODO: Fill in this function
 	
@@ -133,7 +134,7 @@ def classify_all_texts(username,password,input_csv_name):
         #       and the confidences of all the possible classes (ie the same
         #       format as returned by classify_single_text)
         #       Format example:
-        #              {‘classifiername’:
+        #              {'classifiername':
         #                      [
         #                              {'top_class': 'class_name',
         #                              'classes': [
@@ -145,11 +146,11 @@ def classify_all_texts(username,password,input_csv_name):
         #                              ...
         #                              }
         #                      ]
-        #              , ‘classifiername2’:
+        #              , 'classifiername2':
         #                      [
-        #                      …      
+        #                      ...      
         #                      ]
-        #              …
+        #              ...
         #              }
         #
         # Error Handling:
@@ -245,9 +246,9 @@ def compute_average_confidence_of_single_classifier(classifier_dict, input_csv_f
 
 if __name__ == "__main__":
 
-	input_test_data = '<ADD FILE NAME HERE>'
+	input_test_data = ''
 	
-	#STEP 1: Ensure all 11 classifiers are ready for testing
+	#STEP 1: Ensure all 3 classifiers are ready for testing
 	get_classifier_ids()
 	#STEP 2: Test the test data on all classifiers
 	
