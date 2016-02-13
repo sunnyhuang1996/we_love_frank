@@ -195,5 +195,5 @@ if __name__ == "__main__":
 	password = "MZ8VMedaeStu"
 
 	for n in subset:
-                create_classfier(username, password, n, input_file_prefix='ibmTrain')
+                create_classifier(username, password, n, input_file_prefix='ibmTrain')
 
