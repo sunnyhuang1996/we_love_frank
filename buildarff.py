@@ -21,12 +21,18 @@ ca_dict = {
 'PN': ["NNP", "NNPS"], #Proper Nouns
 'ADV': ["RB", "RBR", "RBS"], #adverbs
 'WW': ["WDT", "WP", "WP$", "WRB"], # wh-words
-'MSA': [" smh/", " fwb/", " lmfao/", " lmao/", " lms/", " tbh/", " rofl/", " wtf/", " bff/", " wyd/",
+'MSA': ["smh/", "fwb/", "lmfao/", "lmao/", "lms/", "tbh/", "rofl/", "wtf/", "bff/", "wyd/", "lylc/", "brb/", "atm/", "imao/", "sml/", "btw/",
+"bw/", "imho/", "fyi/", "ppl/", "sob/", "ttyl/", "imo/", "ltr/", "thx/", "kk/", "omg/", "ttys/", "afn/", "bbs/", "cya/", "ez/", "f2f/", "gtr/",
+"ic/", "jk/", "k/", "ly/", "ya/", "nm/", "np/", "plz/", "ru/", "so/", "tc/", "tmi/", "ym/", "ur/", "u/", "sol/"] # modern slang acronyms
+}
+
+''''MSA': [" smh/", " fwb/", " lmfao/", " lmao/", " lms/", " tbh/", " rofl/", " wtf/", " bff/", " wyd/",
         " lylc/", " brb/", " atm/", " imao/", " sml/", " btw/",
 " bw/", " imho/", " fyi/", " ppl/", " sob/", " ttyl/", " imo/", " ltr/", " thx/", " kk/", " omg/",
         " ttys/", " afn/", " bbs/", " cya/", " ez/", " f2f/", " gtr/",
-" ic/", " jk/", " k/", " ly/", " ya/", " nm/", " np/", " plz/", " ru/", " so/", " tc/", " tmi/", " ym/", " ur/", " u/", " sol/"] # modern slang acronyms
+" ic/", " jk/", " k/", " ly/", " ya/", " nm/", " np/", " plz/", " ru/", " so/", " tc/", " tmi/", " ym/", " ur/", " u/", "sol/"] # modern slang acronyms
 }
+'''
 
 ca_list = ["FPP", "SPP", 'TPP', 'CC', 'PTV', 'FTV', 'CO', 'CSC', 'DASH', 'PA', 'EL',
            'CN', 'PN', 'ADV', 'WW', 'MSA', 'upper'];
