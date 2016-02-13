@@ -145,6 +145,7 @@ if __name__ == '__main__':
     first_line=True
 
     for line in input_file.readlines():   # iterates the rows of the file in orders
+        print line
         if line.strip()=="<A=0>" or line.strip()=="<A=4>":
             tweet_count+=1  # the tweet_count th tweet
             if (tweet_count in classrange) and (not first_line):
@@ -156,6 +157,7 @@ if __name__ == '__main__':
                     avg_len_token=0
                  
                 cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
+                print cal
                 output_file.write((str(cal)[1:-1]).replace(" ","") + ", "+ line[3] + "\n")
                 num_token = 0 #general token
                 char_token = 0 #token of only character
