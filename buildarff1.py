@@ -157,6 +157,7 @@ if __name__ == '__main__':
                     avg_len_token=0
                  
                 cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
+                print cal
                 output_file.write((str(cal)[1:-1]).replace(" ","") + ", "+ line[3] + "\n")
                 num_token = 0 #general token
                 char_token = 0 #token of only character
