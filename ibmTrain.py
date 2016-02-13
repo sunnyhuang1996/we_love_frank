@@ -92,10 +92,7 @@ def extract_subset_from_csv_file(input_csv_file, n_lines_to_extract, output_file
                 
                 for line in reader:   
                         if line_count in test_data_set:
-                                print line
-                                #line = line.split()#get tweeter content and call it info
-                                info = line[-1].replace('"', '') #get rid of all "
-                                output_file.write(info + "," + line[0] + "\n")  #write info, class to csv
+                                output_file.write(line)  #write info, class to csv
                                 line_count += 1
                         else:
                                 break
