@@ -145,8 +145,15 @@ def collapse_punc(sentence):
 
 if __name__ == '__main__':
     #tweet = "Trouble in Prof. Mary, I see!!! Hmm... Mary??? Iran so far away. flockofseagullsweregeopoliticallycorrect."
-    group = int(sys.argv[2])    
-    test_data_set = range(5500*group, 5500*(group+1)) + range(800000 + 5500*group, 5500*(group+1)+ 800000)
+
+    #determine whether for training data or testign data
+    test_ind=False
+    if ("train" in sys.argv[1]):
+        group = int(sys.argv[2])    
+        test_data_set = range(5500*group, 5500*(group+1)) + range(800000 + 5500*group, 5500*(group+1)+ 800000)
+    elif("test" in sys.argv[1]) :
+        test_ind=True
+        
     abbrrev = load_list('/u/cs401/Wordlists/abbrev.english')
     pn_abbr = load_list('/u/cs401/Wordlists/pn_abbrev.english')
     m_name = load_list('/u/cs401/Wordlists/maleFirstNames.txt')
@@ -158,11 +165,11 @@ if __name__ == '__main__':
  
     with open(sys.argv[1], 'rb') as csvfile:
         reader = csv.reader(csvfile)   # opens the csv file
-        output_file = open(sys.argv[3], 'wb')
+        output_file = open(sys.argv[-1], 'wb')
         line_count = 1
         for line in reader:   # iterates the rows of the file in orders
-            if line_count in test_data_set:
-                print(line_count)
+            if test_ind or (line_count in test_data_set):
+                #print(line_count)
                 #The reader function will take each line of the file and make a list containing all that line's columns. 
                 output_file.write('<A=' + line[0] + '>\n')
                 #Only keep the tweet, discard tweet time and usrname 

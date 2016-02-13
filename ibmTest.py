@@ -12,7 +12,12 @@
 #		You may also find it helpful to reuse some of your functions from ibmTrain.py.
 #
 
-def get_classifier_ids(username,password):
+import requests
+import json
+#import urllib
+#import urllib2
+
+def get_classifier_ids(username="5946518f-f870-4f75-be57-baa2ca0f4f89",password="MZ8VMedaeStu"):
 	# Retrieves a list of classifier ids from a NLClassifier service 
 	# an outputfile named ibmTrain#.csv (where # is n_lines_to_extract).
 	#
@@ -31,8 +36,15 @@ def get_classifier_ids(username,password):
 	
 	#TODO: Fill in this function
 	
-	return
-	
+        try:
+                url = 'https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers'
+                values = { 'username': username,'password': password }
+                result = requests.get(url, auth=(username, password)).content
+                i = result.index('[')
+                return result[i+1: -2]
+        except:
+                print("there is an error")
+
 
 def assert_all_classifiers_are_available(username, password, classifier_id_list):
 	# Asserts all classifiers in the classifier_id_list are 'Available' 
@@ -53,6 +65,13 @@ def assert_all_classifiers_are_available(username, password, classifier_id_list)
 	#
 	
 	#TODO: Fill in this function
+
+	for claf in classifier_id_list:
+                try:
+                        url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/" + claf
+                        r = requests.get('https://api.github.com/events')
+                        r.json()
+                
 	
 	return
 
@@ -223,12 +242,13 @@ def compute_average_confidence_of_single_classifier(classifier_dict, input_csv_f
 	return
 
 
+
 if __name__ == "__main__":
 
 	input_test_data = '<ADD FILE NAME HERE>'
 	
 	#STEP 1: Ensure all 11 classifiers are ready for testing
-	
+	get_classifier_ids()
 	#STEP 2: Test the test data on all classifiers
 	
 	#STEP 3: Compute the accuracy for each classifier

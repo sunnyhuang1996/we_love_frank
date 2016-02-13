@@ -1,0 +1,5 @@
+python twtt.py testdata.manualSUBSET.2009.06.14.csv 2 test.twt
+python buildarff.py test.twt test.arff
+java -cp /u/cs401/WEKA/weka.jar weka.classifiers.functions.SMO -t train.arff -T test.arff
+java -cp /u/cs401/WEKA/weka.jar weka.classifiers.bayes.NaiveBayes -t train.arff -T test.arff
+java -cp /u/cs401/WEKA/weka.jar weka.classifiers.trees.J48 -t train.arff -T test.arff
