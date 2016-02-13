@@ -14,8 +14,6 @@
 
 import requests
 import json
-#import urllib
-#import urllib2
 
 def get_classifier_ids(username="5946518f-f870-4f75-be57-baa2ca0f4f89",password="MZ8VMedaeStu"):
 	# Retrieves a list of classifier ids from a NLClassifier service 
@@ -245,9 +243,9 @@ def compute_average_confidence_of_single_classifier(classifier_dict, input_csv_f
 
 if __name__ == "__main__":
 
-	input_test_data = '<ADD FILE NAME HERE>'
+	input_test_data = ''
 	
-	#STEP 1: Ensure all 11 classifiers are ready for testing
+	#STEP 1: Ensure all 3 classifiers are ready for testing
 	get_classifier_ids()
 	#STEP 2: Test the test data on all classifiers
 	
