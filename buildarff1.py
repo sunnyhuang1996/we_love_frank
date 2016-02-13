@@ -43,7 +43,6 @@ Perfective aspect (has/ have eaten) should be counted as one token
 # of wh-words (WDT, WP, WP$, WRB)
 
 """
-
 def aggre_count(s, categories="all"):
     '''return list of count of apperence of words in categories in string s'''
     L = []
@@ -55,7 +54,6 @@ def aggre_count(s, categories="all"):
             L.append(assign_cate(s, c))
             
     return L
-    
 
 def assign_cate(s, category):
     '''determine which category of words is calling'''
@@ -77,13 +75,13 @@ def count_word(s,category):
     '''
     count the total number of apperence of words in category in string s
     '''
-    if category=="EL":
-        return sum([s.count(word) for word in ca_dict[category]])
-    elif category=="MSA":
-        return sum([s.count(word+"/") for word in ca_dict[category]]) + sum([s.count(word.upper()+"/") for word in ca_dict[category]])
-    else:
-        return sum([s.count(word+"/") for word in ca_dict[category]])
-        
+    #return sum([s.count(word) for word in ca_dict[category]])
+    s = tag.sub('', s.upper())
+    s = s.split()
+    big_dict = Counter(s)
+    dict_s = {word.upper: big_dict[word.upper()] for word in ca_dict[category]}
+    return sum(dict_s.values())
+    
 
 def count_type(s, category):
     '''
@@ -91,7 +89,6 @@ def count_type(s, category):
     '''
     return sum([s.count("/"+tag+" ") for tag in ca_dict[category]])
 
- 
 
 if __name__ == '__main__':
     
@@ -145,7 +142,6 @@ if __name__ == '__main__':
     first_line=True
 
     for line in input_file.readlines():   # iterates the rows of the file in orders
-        print line
         if line.strip()=="<A=0>" or line.strip()=="<A=4>":
             tweet_count+=1  # the tweet_count th tweet
             if (tweet_count in classrange) and (not first_line):
@@ -157,7 +153,6 @@ if __name__ == '__main__':
                     avg_len_token=0
                  
                 cal+=[avg_len_sentence, avg_len_token, num_sen]  #result
-                print cal
                 output_file.write((str(cal)[1:-1]).replace(" ","") + ", "+ line[3] + "\n")
                 num_token = 0 #general token
                 char_token = 0 #token of only character
