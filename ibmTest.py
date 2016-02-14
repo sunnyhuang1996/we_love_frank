@@ -360,7 +360,7 @@ def compute_average_confidence_of_single_classifier(classifier_dict, input_csv_f
 		line_index = 0
 		correct_confidence = 0
 		correct_count = 0
-		incoorect_confidence = 0
+		incorrect_confidence = 0
 		incorrect_count = 0
 
 		for line in reader:   # iterates the rows of the file in orders
