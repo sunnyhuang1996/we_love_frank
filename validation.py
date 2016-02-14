@@ -29,8 +29,8 @@ def writelines(n):
     trainfile = open("train" + str(n+1) + ".arff", 'wb')
     valifile = open("vali" + str(n+1) + ".arff", 'wb')
 
-    trainfile.write("@relation train")
-    valifile.write("@relation validation")
+    trainfile.write("@relation train\n")
+    valifile.write("@relation validation\n")
 
     writetitle(trainfile)
     writetitle(valifile)

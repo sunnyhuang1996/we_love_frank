@@ -1,4 +1,5 @@
-@relation train@attribute first_person_pronoun numeric
+@relation train
+@attribute first_person_pronoun numeric
 @attribute second_person_pronoun numeric
 @attribute third_person_pronoun numeric
 @attribute coordinating_conj numeric
