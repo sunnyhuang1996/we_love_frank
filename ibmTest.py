@@ -313,6 +313,7 @@ def compute_accuracy_of_single_classifier(classifier_dict, input_csv_file_name):
 			
 			if classifier_dict[line_index]['top_class'] == line[0]:
 				correct_classification += 1	
+			line_index += 1
 	
 		return (correct_classification / (line_index + 1))
 
@@ -376,7 +377,8 @@ def compute_average_confidence_of_single_classifier(classifier_dict, input_csv_f
 				neg_count += 1
 				for class_info in classifier_dict[line_index]['classes']:
 					if class_info['class_name'] == '0':
-						neg_confidence += class_info['confidence']			
+						neg_confidence += class_info['confidence']
+			line_index += 1
 	
 		return (pos_confidence / pos_count, neg_confidence / neg_count)
 
