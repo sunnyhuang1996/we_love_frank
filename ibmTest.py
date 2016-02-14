@@ -143,7 +143,7 @@ def classify_single_text(username,password,classifier_id,text):
 		result = requests.post(url, auth=(username, password), json={'text': text})
 		classification = ast.literal_eval(result.text)
 		classification.pop('url')
-		#classification.pop('text')
+		classification.pop('text')
 		classification.pop('classifier_id')
 		return classification
 			
@@ -249,8 +249,7 @@ def classify_all_texts(username,password,input_csv_name):
 	
 	classification_dict = dict()
 	
-	classifier_list = ["c7fa49x23-nlc-998","c7e487x21-nlc-1079"]
-	#classifier_list = get_classifier_ids(username,password)
+	classifier_list = get_classifier_ids(username, password)
 	for classifier in classifier_list:
 		classification_dict[classifier] = list()
 	
@@ -310,7 +309,7 @@ def compute_accuracy_of_single_classifier(classifier_dict, input_csv_file_name):
 		for line in reader:   # iterates the rows of the file in orders
 			if len(line) != 6:
 				raise CSVFormatError(input_csv_file_name)
-			print(classifier_dict[line_index]['top_class'], "<----->", line[0], "\n", classifier_dict[line_index]['text'])
+			#print(classifier_dict[line_index]['top_class'], "<----->", line[0], "\n", classifier_dict[line_index]['text'])
 			if classifier_dict[line_index]['top_class'] == line[0]:
 				correct_classification += 1	
 			line_index += 1
@@ -393,27 +392,21 @@ if __name__ == "__main__":
 	
 	#STEP 1: Ensure all 3 classifiers are ready for testing
 	classifier_id_list = get_classifier_ids(username, password)
-	'''
-	classify_single_text(username,password,'c7fa49x23-nlc-998', 'i lam so in love with Bobby Flay... he is my favorite. RT @terrysimpson: @bflay you need a place in Phoenix. We have great peppers here!')
-	'''
+
 	#STEP 2: Test the test data on all classifiers
 	assert_all_classifiers_are_available(username, password, classifier_id_list)
 	#STEP 3: Compute the accuracy for each classifier
 	#STEP 4: Compute the confidence of each class for each classifier
 
-	'''
-	testing_csv = '/u/cs401/A1/tweets/testdata.manualSUBSET.2009.06.14.csv'
-	classifier_dict = classify_all_texts(username,password,testing_csv)
-	accuracy = compute_accuracy_of_single_classifier(classifier_dict, testing_csv)
-	print(accuracy)
-	'''
 	testing_csv = '/u/cs401/A1/tweets/testdata.manualSUBSET.2009.06.14.csv'
 	classifier_dict = classify_all_texts(username,password,testing_csv)	
-	classifier_list = ["c7fa49x23-nlc-998","c7e487x21-nlc-1079"]
-	#classifier_list = get_classifier_ids(username,password)
+	classifier_list = get_classifier_ids(username,password)
+	
+	accuracy_list = dict()
 	for classifier in classifier_list:
-		accuracy = compute_accuracy_of_single_classifier(classifier_dict[classifier], testing_csv)
-		print(accuracy)
+		accuracy_list[classifer] = compute_accuracy_of_single_classifier(classifier_dict[classifier], testing_csv)
+	
+	print(accuracy_list)
 	
 	'''
 	for classifier in classifier_id_list:
