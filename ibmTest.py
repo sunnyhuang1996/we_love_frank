@@ -306,7 +306,7 @@ def compute_accuracy_of_single_classifier(classifier_dict, input_csv_file_name):
 	with open(input_csv_file_name, 'rb') as csvfile:
 		reader = csv.reader(csvfile)   # opens the csv file
 		line_index = 0
-		correct_classfication = 0
+		correct_classification = 0
 		for line in reader:   # iterates the rows of the file in orders
 			if len(line) != 6:
 				raise CSVFormatError(input_csv_file_name)
