@@ -142,6 +142,7 @@ def classify_single_text(username,password,classifier_id,text):
 		url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/" + classifier_id + "/classify"
 		result = requests.post(url, auth=(username, password), json={'text': text})
 		classification = ast.literal_eval(result.text)
+		print(classification)
 		classification.pop('url')
 		classification.pop('text')
 		classification.pop('classifier_id')
