@@ -16,6 +16,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 import json
 import sys
+import ast
 
 def get_classifier_ids(username,password):
 	# Retrieves a list of classifier ids from a NLClassifier service 
@@ -139,8 +140,11 @@ def classify_single_text(username,password,classifier_id,text):
 	try:
 		url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/" + classifier_id + "/classify"
 		result = requests.post(url, auth=(username, password), json={'text': text})
-		print(str(json.loads(result.text)))
-		return	str(json.loads(result.text))		
+		classification = ast.literal_eval(result.text)
+		classification.pop('url')
+		classification.pop('text')
+		classification.pop('classifier_id')
+		return classification
 			
 	except requests.exceptions.RequestException as error:  
 		print error
@@ -158,7 +162,39 @@ def remove_classifier(username, password, classifier_id):
 		sys.exit(1)
 		
 		
+def convert_to_watson_csv_format(input_csv_name, output_csv_name): 
+	# Converts an existing training csv file. The output file should
+	# contain only the 11,000 lines of your group's specific training set.
+	#
+	# Inputs:
+	#	input_csv - a string containing the name of the original csv file
+	#		ex. "my_file.csv"
+	#
+	#	output_csv - a string containing the name of the output csv file
+	#		ex. "my_output_file.csv"
+	#
+	# Returns:
+	#	None
 	
+	#TODO: Fill in this function
+	try:
+                csvfile = open(input_csv_name, 'rb')
+                reader = csv.reader(csvfile)   # opens the csv file
+                output_file = open(output_csv_name, 'wb')
+                for line in reader:
+			info = (line[-1]).strip("\n")
+			info = info.strip()
+			info = " ".join(info.split())
+			info = info.replace('"', '') #get rid of all "
+			output_file.write("\"" + info + "\"" + "," + line[0] + "\n")  #write info, class to csv
+                csvfile.close()
+                output_file.close()
+                
+        except IOError:
+		print "Could not read file:", input_csv_name
+		sys.exit()
+		
+		
 
 def classify_all_texts(username,password,input_csv_name):
         # Classifies all texts in an input csv file using all classifiers for a given NLClassifier
@@ -210,17 +246,21 @@ def classify_all_texts(username,password,input_csv_name):
 
         #TODO: Fill in this function
 	
-	try:
-		url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/" + classifier_id + "/classify"
-		result = requests.post(url, auth=(username, password), json={'text': text})
-		print(result.text)
-		return	str(json.loads(result.text))		
+	classification_dict = dict()
+	classifier_list = get_classifier_ids(username,password)
+	for classifier in classifier_list:
+		classification_dict[classifier] = list()
+	
+	with open(input_csv_name, 'rb') as csvfile:
+		reader = csv.reader(csvfile)   # opens the csv file
+		
+		for line in reader:   # iterates the rows of the file in orders
+			if len(line) != 6:
+				raise CSVFormatError(input_csv_name)
+			for classifier in classifier_list:
+				classification_dict[classifier].append(classify_single_text(username,password,classifier_id,line[-1]))
 			
-	except requests.exceptions.RequestException as error:  
-		print error
-		sys.exit(1)	
-        
-        return
+        return classifier_list
 
 
 def compute_accuracy_of_single_classifier(classifier_dict, input_csv_file_name):
@@ -260,7 +300,18 @@ def compute_accuracy_of_single_classifier(classifier_dict, input_csv_file_name):
 	
 	#TODO: fill in this function
 	
-	return
+	with open(input_csv_name, 'rb') as csvfile:
+		reader = csv.reader(csvfile)   # opens the csv file
+		line_index = 0
+		correct_classfication = 0
+		for line in reader:   # iterates the rows of the file in orders
+			if len(line) != 6:
+				raise CSVFormatError(input_csv_name)
+			
+			if classification_dict[line_index]['top_class'] == line[0]:
+				correct_classification += 1	
+	
+		return (correct_classification / (line_index + 1))
 
 def compute_average_confidence_of_single_classifier(classifier_dict, input_csv_file_name):
 	# Given a list of "classifications" for a given classifier, compute the average 
@@ -290,7 +341,7 @@ def compute_average_confidence_of_single_classifier(classifier_dict, input_csv_f
 	#		6 column format of the input test/training files
 	#
 	# Returns:
-	#	The average confidence of the classifier, as a number between [0.0-1.0]
+	#	A tuple of average confidence of the classifier, as a number between [0.0-1.0]
 	#	See the handout for more info.
 	#
 	# Error Handling:
@@ -300,7 +351,31 @@ def compute_average_confidence_of_single_classifier(classifier_dict, input_csv_f
 	
 	#TODO: fill in this function
 	
-	return
+	with open(input_csv_name, 'rb') as csvfile:
+		reader = csv.reader(csvfile)   # opens the csv file
+		line_index = 0
+		neg_confidence = 0
+		neg_count = 0
+		pos_confidence = 0
+		pos_count = 0
+
+		for line in reader:   # iterates the rows of the file in orders
+			if len(line) != 6:
+				raise CSVFormatError(input_csv_name)
+			
+			if (line[0] == '4') and (classification_dict[line_index]['top_class'] == line[0]):
+				pos_count += 1
+				for class_info in classification_dict[line_index]['classes']:
+					if class_info['class_name'] == '4':
+						pos_confidence += class_info['confidence']
+	
+			if (line[0] == '0') and (classification_dict[line_index]['top_class'] == line[0]):
+				neg_count += 1
+				for class_info in classification_dict[line_index]['classes']:
+					if class_info['class_name'] == '0':
+						neg_confidence += class_info['confidence']			
+	
+		return (pos_confidence / pos_count, neg_confidence / neg_count)
 
 
 
@@ -313,15 +388,19 @@ if __name__ == "__main__":
 	#STEP 1: Ensure all 3 classifiers are ready for testing
 	classifier_id_list = get_classifier_ids(username, password)
 	'''
-	classify_single_text(username,password,'c7fa49x23-nlc-919', 'good morning everyone! mmmm i want doughnuts for breakfast.. i really dont feel like going out to get them!! haha')
+	classify_single_text(username,password,'c7fa49x23-nlc-998', 'i lam so in love with Bobby Flay... he is my favorite. RT @terrysimpson: @bflay you need a place in Phoenix. We have great peppers here!')
 	'''
 	#STEP 2: Test the test data on all classifiers
-	assert_all_classifiers_are_available(username, password, classifier_id_list)
+	#assert_all_classifiers_are_available(username, password, classifier_id_list)
 	#STEP 3: Compute the accuracy for each classifier
 	#STEP 4: Compute the confidence of each class for each classifier
 
-
-
+	
+	testing_csv = '/u/cs401/A1/tweets/testdata.manualSUBSET.2009.06.14.csv'
+	classifier_dict = classify_all_texts(username,password,testing_csv)
+	accuracy = compute_accuracy_of_single_classifier(classifier_dict, testing_csv)
+	print(accuracy)
+	
 	
 	'''
 	for classifier in classifier_id_list:
