@@ -404,7 +404,7 @@ if __name__ == "__main__":
 	
 	accuracy_list = dict()
 	for classifier in classifier_list:
-		accuracy_list[classifer] = compute_accuracy_of_single_classifier(classifier_dict[classifier], testing_csv)
+		accuracy_list[classifier] = compute_accuracy_of_single_classifier(classifier_dict[classifier], testing_csv)
 	
 	print(accuracy_list)
 	
