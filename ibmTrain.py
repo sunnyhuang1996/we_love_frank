@@ -43,7 +43,7 @@ def convert_training_csv_to_watson_csv_format(input_csv_name, group_id, output_c
                 csvfile = open(input_csv_name, 'rb')
                 reader = csv.reader(csvfile)   # opens the csv file
                 output_file = open(output_csv_name, 'wb')
-                line_count=1
+                line_count=0
                 for line in reader:
                         if line_count in test_data_set:
 				info = (line[-1]).strip("\n")
@@ -88,8 +88,8 @@ def extract_subset_from_csv_file(input_csv_file, n_lines_to_extract, output_file
 	try:
                 csvfile = open(input_csv_file, 'rb')
                 output_file = open(output_file_prefix+str(n_lines_to_extract)+'.csv', 'wb')
-                line_count = 1
-                test_data_set = range(1, n_lines_to_extract+1) + range(5501, 5502 + n_lines_to_extract)
+                line_count = 0
+                test_data_set = range(0, n_lines_to_extract) + range(5500, 5500 + n_lines_to_extract)
                 
                 for line in csvfile.readlines():   
                         if line_count in test_data_set:
@@ -97,9 +97,9 @@ def extract_subset_from_csv_file(input_csv_file, n_lines_to_extract, output_file
 				output_file.write(" ".join(line.split()) + "\n")  #write info, class to csv
 				line_count += 1
                         else:
-				line_count += 1
-				if line_count > 5500 + n_lines_to_extract:
+				if line_count >= 5500 + n_lines_to_extract:
 					break
+				line_count += 1
 				
                 csvfile.close()
                 output_file.close()
@@ -168,8 +168,9 @@ if __name__ == "__main__":
         
 	input_csv_name = '/u/cs401/A1/tweets/training.1600000.processed.noemoticon.csv'
 	#DO NOT CHANGE THE NAME OF THIS FILE
-	output_csv_name ='training_11000_watson_style.csv'	
-	convert_training_csv_to_watson_csv_format(input_csv_name, 2, output_csv_name);
+	output_csv_name ='training_11000_watson_style.csv'
+	group_id = 2
+	convert_training_csv_to_watson_csv_format(input_csv_name, group_id, output_csv_name);
 	
 	
 	### STEP 2: Save 3 subsets in the new format into ibmTrain#.csv files
