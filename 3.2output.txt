@@ -1,7 +1,4 @@
-=:wq
-q
-:q
-
+========= n=500 =====================
 SMO
 
 Kernel used:
@@ -79,6 +76,9 @@ Total Number of Instances              359
   85  92 |   a = 0
   78 104 |   b = 4
 
+
+
+========= n=1000 =====================
 
 SMO
 
@@ -158,6 +158,8 @@ Total Number of Instances              359
   66 116 |   b = 4
 
 
+========= n=1500 =====================
+
 SMO
 
 Kernel used:
@@ -235,6 +237,9 @@ Total Number of Instances              359
   68 109 |   a = 0
   57 125 |   b = 4
 
+
+
+========= n=2000 =====================
 
 SMO
 
@@ -314,6 +319,9 @@ Total Number of Instances              359
   66 116 |   b = 4
 
 
+
+========= n=2500 =====================
+
 SMO
 
 Kernel used:
@@ -391,6 +399,9 @@ Total Number of Instances              359
   91  86 |   a = 0
   73 109 |   b = 4
 
+
+
+========= n=3000 =====================
 
 SMO
 
@@ -470,6 +481,9 @@ Total Number of Instances              359
   71 111 |   b = 4
 
 
+
+========= n=3500 =====================
+
 SMO
 
 Kernel used:
@@ -547,6 +561,8 @@ Total Number of Instances              359
   83  94 |   a = 0
   67 115 |   b = 4
 
+
+========= n=4000 =====================
 
 SMO
 
@@ -626,6 +642,9 @@ Total Number of Instances              359
   65 117 |   b = 4
 
 
+
+========= n=4500 =====================
+
 SMO
 
 Kernel used:
@@ -703,6 +722,8 @@ Total Number of Instances              359
   84  93 |   a = 0
   63 119 |   b = 4
 
+
+========= n=5000 =====================
 
 SMO
 
@@ -782,6 +803,9 @@ Total Number of Instances              359
   66 116 |   b = 4
 
 
+
+========= n=5500 =====================
+
 SMO
 
 Kernel used:
@@ -858,4 +882,10 @@ Total Number of Instances              359
    a   b   <-- classified as
   85  92 |   a = 0
   67 115 |   b = 4
+
+
+
+========Comments======================
+The accuracy increases as the number of training data increases. 
+Because larger size of training dataset can decrease the bias of model (if majority of new data is correct). If there are many noise in data, the trained model will be far away from true model. With increasing size of training data, we can decrease the proportion of noise and reduce their negative effect.  
 
