@@ -50,7 +50,7 @@ def convert_training_csv_to_watson_csv_format(input_csv_name, group_id, output_c
 				info = info.strip()
 				info = " ".join(info.split())
 				info = info.replace('"', '') #get rid of all "
-				output_file.write(info + "," + line[0] + "\n")  #write info, class to csv
+				output_file.write("\"" + info + "\""+"," + line[0] + "\n")  #write info, class to csv
                         line_count += 1
                 csvfile.close()
                 output_file.close()

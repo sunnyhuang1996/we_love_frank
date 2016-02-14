@@ -15,6 +15,7 @@
 import requests
 from requests.auth import HTTPBasicAuth
 import json
+import sys
 
 def get_classifier_ids(username,password):
 	# Retrieves a list of classifier ids from a NLClassifier service 
@@ -35,18 +36,33 @@ def get_classifier_ids(username,password):
 	
 	#TODO: Fill in this function
 	
-        #try:
-        url = 'https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers'
-	result = requests.get(url, auth=(username, password))
-	classifier_list = json.loads(result.text)['classifiers']
-	return_list = []
-	for classifier in classifier_list:
-		return_list.append(str(classifier['classifier_id']))
-	#except:
-		#raise Exception("classifiers call fialed, HTTP: %d" % result.status_code)
-	return return_list
+        try:
+		url = 'https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers'
+		result = requests.get(url, auth=(username, password))
+		classifier_list = json.loads(result.text)['classifiers']
+
+	except requests.exceptions.RequestException as error:   
+		print error
+		sys.exit(1)
+	else:
+		return_list = []
+		for classifier in classifier_list:
+			return_list.append(str(classifier['classifier_id']))		
+		return return_list
 
 
+class NotAvailableError(Exception):
+	def __init__(self, classifier_id):
+		self.classifier_id= classifier_id
+	def __str__(self):
+		return repr(self.value)
+	
+class CSVFormatError(Exception):
+	def __init__(self, csv_file):
+		self.csv_file= csv_file
+	def __str__(self):
+		return repr(self.value)
+	
 def assert_all_classifiers_are_available(username,password,classifier_id_list):
 	# Asserts all classifiers in the classifier_id_list are 'Available' 
 	#
@@ -69,13 +85,21 @@ def assert_all_classifiers_are_available(username,password,classifier_id_list):
 	
 	for classifier in classifier_id_list:
 		
-		url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/" + classifier
-		result = requests.get(url, auth=(username, password))
+		try:
 		
-		#get the status for each classfier
-		classifier_status = str(json.loads(result.text)['status'])
-		if classifier_status != 'Available':
-			print(classifier)
+			url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/" + classifier
+			result = requests.get(url, auth=(username, password))
+			#get the status for each classfier
+			classifier_status = str(json.loads(result.text)['status'])
+			#if classifier_status != 'Available':	
+				#raise NotAvailableError(classifier)
+		
+		except requests.exceptions.RequestException as error:    # This is the correct syntax
+			print error
+			sys.exit(1)
+			
+		print(result.text)
+
 		
 	return
 
@@ -112,7 +136,16 @@ def classify_single_text(username,password,classifier_id,text):
 	
 	#TODO: Fill in this function
 	
-	return
+	try:
+		url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/" + classifier_id + "/classify"
+		result = requests.post(url, auth=(username, password), json={'text': text})
+		print(str(json.loads(result.text)))
+		return	str(json.loads(result.text))		
+			
+	except requests.exceptions.RequestException as error:  
+		print error
+		sys.exit(1)	
+
 
 
 def classify_all_texts(username,password,input_csv_name):
@@ -164,6 +197,16 @@ def classify_all_texts(username,password,input_csv_name):
         #
 
         #TODO: Fill in this function
+	
+	try:
+		url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/" + classifier_id + "/classify"
+		result = requests.post(url, auth=(username, password), json={'text': text})
+		print(result.text)
+		return	str(json.loads(result.text))		
+			
+	except requests.exceptions.RequestException as error:  
+		print error
+		sys.exit(1)	
         
         return
 
@@ -257,8 +300,8 @@ if __name__ == "__main__":
 	
 	#STEP 1: Ensure all 3 classifiers are ready for testing
 	classifier_id_list = get_classifier_ids(username, password)
+	classify_single_text(username,password,'c7fa49x23-nlc-919', 'good morning everyone! mmmm i want doughnuts for breakfast.. i really dont feel like going out to get them!! haha')
 	#STEP 2: Test the test data on all classifiers
-	print(classifier_id_list)
 	assert_all_classifiers_are_available(username, password, classifier_id_list)
 	#STEP 3: Compute the accuracy for each classifier
 	#STEP 4: Compute the confidence of each class for each classifier
