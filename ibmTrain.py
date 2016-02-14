@@ -161,6 +161,7 @@ def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 	
 if __name__ == "__main__":
 	
+	subset = [500, 2500, 5000]
 	### STEP 1: Convert csv file into two-field watson format
         '''
 	input_csv_name = '/u/cs401/A1/tweets/training.1600000.processed.noemoticon.csv'
@@ -175,7 +176,7 @@ if __name__ == "__main__":
 	#
 	# you should make use of the following function call:
 	#
-	subset = [500, 2500, 5000]
+	
 	for n_lines_to_extract in subset:
                 extract_subset_from_csv_file(output_csv_name,n_lines_to_extract)
 	'''
