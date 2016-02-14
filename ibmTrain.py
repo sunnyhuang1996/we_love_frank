@@ -143,16 +143,14 @@ def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 	url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1"
 
 	csv_file = input_file_prefix+str(n)+'.csv'
-	
-	metadata = {"language":"en","name":"Classifier " + str(n)}
-	meta_file = dumps(metadata)
+	params = {'language': 'en', 'name': 'Classifier ' + str(n)}
 	try:
 		training_file = open(csv_file, 'rb')
-		
 		files = {'training_data': training_file, 'training_metadata':meta_file}
-		response = requests.post(url, auth=(username, password), files=files)
+		
+		response = requests.post(url, auth=(username, password), \
+		                         files=[('training_metadata', ('training.json', json.dumps(params))),('training_data', training_file])
 		training_file.close()
-                
 	except IOError:
 		print ("Could not read file:", csv_file)
 		sys.exit()
@@ -191,8 +189,8 @@ if __name__ == "__main__":
 	#
 	# you should make use of the following function call
 
-	username = "5946518f-f870-4f75-be57-baa2ca0f4f89"
-	password = "MZ8VMedaeStu"
+	username = '5946518f-f870-4f75-be57-baa2ca0f4f89'
+	password = 'MZ8VMedaeStu'
 
 	for n in subset:
                 create_classifier(username, password, n, input_file_prefix='ibmTrain')
