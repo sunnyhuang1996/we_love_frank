@@ -380,7 +380,7 @@ def compute_average_confidence_of_single_classifier(classifier_dict, input_csv_f
 						neg_confidence += class_info['confidence']
 			line_index += 1
 	
-		return (pos_confidence / pos_count, neg_confidence / neg_count)
+		return (float(pos_confidence) / pos_count, float(neg_confidence) / neg_count)
 
 
 
@@ -408,6 +408,13 @@ if __name__ == "__main__":
 	
 	print(accuracy_list)
 	
+	
+	confidence_list = dict()
+	for classifier in classifier_list:
+		confidence_list[classifier] = compute_average_confidence_of_single_classifier(classifier_dict[classifier], testing_csv)
+	
+	print(confidence_list)	
+
 	'''
 	for classifier in classifier_id_list:
 		remove_classifier(username, password, classifier)
