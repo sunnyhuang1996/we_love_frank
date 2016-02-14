@@ -149,7 +149,7 @@ def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 		files = {'training_data': training_file, 'training_metadata':meta_file}
 		
 		response = requests.post(url, auth=(username, password), \
-		                         files=[('training_metadata', ('training.json', json.dumps(params))),('training_data', training_file])
+		                         files=[('training_metadata', ('training.json', json.dumps(params))),('training_data', training_file)])
 		training_file.close()
 	except IOError:
 		print ("Could not read file:", csv_file)
