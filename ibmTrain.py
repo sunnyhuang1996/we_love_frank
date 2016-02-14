@@ -140,7 +140,7 @@ def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 	#	or if the input csv file does not exist or cannot be read.
 	#
 	
-	url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1"
+	url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers"
 
 	csv_file = input_file_prefix+str(n)+'.csv'
 	params = {'language': 'en', 'name': 'Classifier ' + str(n)}
