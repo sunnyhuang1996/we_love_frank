@@ -358,29 +358,29 @@ def compute_average_confidence_of_single_classifier(classifier_dict, input_csv_f
 	with open(input_csv_file_name, 'rb') as csvfile:
 		reader = csv.reader(csvfile)   # opens the csv file
 		line_index = 0
-		neg_confidence = 0
-		neg_count = 0
-		pos_confidence = 0
-		pos_count = 0
+		correct_confidence = 0
+		correct_count = 0
+		incoorect_confidence = 0
+		incorrect_count = 0
 
 		for line in reader:   # iterates the rows of the file in orders
 			if len(line) != 6:
 				raise CSVFormatError(input_csv_file_name)
 			
-			if (line[0] == '4') and (classifier_dict[line_index]['top_class'] == line[0]):
-				pos_count += 1
+			if (classifier_dict[line_index]['top_class'] == line[0]):
+				correct_count += 1
 				for class_info in classifier_dict[line_index]['classes']:
-					if class_info['class_name'] == '4':
-						pos_confidence += class_info['confidence']
+					if class_info['class_name'] == classifier_dict[line_index]['top_class']:
+						correct_confidence += class_info['confidence']
 	
-			if (line[0] == '0') and (classifier_dict[line_index]['top_class'] == line[0]):
-				neg_count += 1
+			else:
+				incorrect_count += 1
 				for class_info in classifier_dict[line_index]['classes']:
-					if class_info['class_name'] == '0':
-						neg_confidence += class_info['confidence']
+					if class_info['class_name'] != classifier_dict[line_index]['top_class']:
+						incorrect_confidence += class_info['confidence']
 			line_index += 1
 	
-		return (float(pos_confidence) / pos_count, float(neg_confidence) / neg_count)
+		return (float(correct_confidence) / correct_count, float(incorrect_confidence) / incorrect_count)
 
 
 
