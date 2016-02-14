@@ -142,7 +142,6 @@ def classify_single_text(username,password,classifier_id,text):
 		url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/" + classifier_id + "/classify"
 		result = requests.post(url, auth=(username, password), json={'text': text})
 		classification = ast.literal_eval(result.text)
-		print(classification)
 		classification.pop('url')
 		classification.pop('text')
 		classification.pop('classifier_id')
@@ -304,15 +303,15 @@ def compute_accuracy_of_single_classifier(classifier_dict, input_csv_file_name):
 	
 	#TODO: fill in this function
 	
-	with open(input_csv_name, 'rb') as csvfile:
+	with open(input_csv_file_name, 'rb') as csvfile:
 		reader = csv.reader(csvfile)   # opens the csv file
 		line_index = 0
 		correct_classfication = 0
 		for line in reader:   # iterates the rows of the file in orders
 			if len(line) != 6:
-				raise CSVFormatError(input_csv_name)
+				raise CSVFormatError(input_csv_file_name)
 			
-			if classification_dict[line_index]['top_class'] == line[0]:
+			if classifier_dict[line_index]['top_class'] == line[0]:
 				correct_classification += 1	
 	
 		return (correct_classification / (line_index + 1))
@@ -355,7 +354,7 @@ def compute_average_confidence_of_single_classifier(classifier_dict, input_csv_f
 	
 	#TODO: fill in this function
 	
-	with open(input_csv_name, 'rb') as csvfile:
+	with open(input_csv_file_name, 'rb') as csvfile:
 		reader = csv.reader(csvfile)   # opens the csv file
 		line_index = 0
 		neg_confidence = 0
@@ -365,17 +364,17 @@ def compute_average_confidence_of_single_classifier(classifier_dict, input_csv_f
 
 		for line in reader:   # iterates the rows of the file in orders
 			if len(line) != 6:
-				raise CSVFormatError(input_csv_name)
+				raise CSVFormatError(input_csv_file_name)
 			
-			if (line[0] == '4') and (classification_dict[line_index]['top_class'] == line[0]):
+			if (line[0] == '4') and (classifier_dict[line_index]['top_class'] == line[0]):
 				pos_count += 1
-				for class_info in classification_dict[line_index]['classes']:
+				for class_info in classifier_dict[line_index]['classes']:
 					if class_info['class_name'] == '4':
 						pos_confidence += class_info['confidence']
 	
-			if (line[0] == '0') and (classification_dict[line_index]['top_class'] == line[0]):
+			if (line[0] == '0') and (classifier_dict[line_index]['top_class'] == line[0]):
 				neg_count += 1
-				for class_info in classification_dict[line_index]['classes']:
+				for class_info in classifier_dict[line_index]['classes']:
 					if class_info['class_name'] == '0':
 						neg_confidence += class_info['confidence']			
 	
@@ -407,6 +406,11 @@ if __name__ == "__main__":
 	'''
 	testing_csv = '/u/cs401/A1/tweets/testdata.manualSUBSET.2009.06.14.csv'
 	classifier_dict = classify_all_texts(username,password,testing_csv)	
+	classifier_list = ["c7fa49x23-nlc-998","c7e487x21-nlc-1079"]
+	#classifier_list = get_classifier_ids(username,password)
+	for classifier in classifier_list:
+		accuracy = compute_accuracy_of_single_classifier(classifier_dict[classifier], testing_csv)
+		print(accuracy)
 	
 	'''
 	for classifier in classifier_id_list:
