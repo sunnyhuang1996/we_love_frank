@@ -68,10 +68,10 @@ def assert_all_classifiers_are_available(username, password, classifier_id_list)
 	#TODO: Fill in this function
 	
 	for claf in classifier_id_list:
-		try:
-			url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/" + claf
-			r = requests.get(url)
-			r.json()
+		
+		url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/" + claf
+		r = requests.get(url)
+		r.json()
 	return
 
 def classify_single_text(username,password,classifier_id,text):
