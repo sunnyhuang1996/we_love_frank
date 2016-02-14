@@ -146,7 +146,19 @@ def classify_single_text(username,password,classifier_id,text):
 		print error
 		sys.exit(1)	
 
-
+def remove_classifier(username, password, classifier_id):
+	try:
+	
+		url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/" + classifier
+		result = requests.delete(url, auth=(username, password))
+		print("remove " + classifier + "-->" + str(result.status_code))
+	
+	except requests.exceptions.RequestException as error:    # This is the correct syntax
+		print error
+		sys.exit(1)
+		
+		
+	
 
 def classify_all_texts(username,password,input_csv_name):
         # Classifies all texts in an input csv file using all classifiers for a given NLClassifier
@@ -300,10 +312,19 @@ if __name__ == "__main__":
 	
 	#STEP 1: Ensure all 3 classifiers are ready for testing
 	classifier_id_list = get_classifier_ids(username, password)
+	'''
 	classify_single_text(username,password,'c7fa49x23-nlc-919', 'good morning everyone! mmmm i want doughnuts for breakfast.. i really dont feel like going out to get them!! haha')
+	'''
 	#STEP 2: Test the test data on all classifiers
 	assert_all_classifiers_are_available(username, password, classifier_id_list)
 	#STEP 3: Compute the accuracy for each classifier
 	#STEP 4: Compute the confidence of each class for each classifier
+
+
+
 	
+	'''
+	for classifier in classifier_id_list:
+		remove_classifier(username, password, classifier)
 	
+	'''
