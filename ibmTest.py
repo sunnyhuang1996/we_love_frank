@@ -311,7 +311,7 @@ def compute_accuracy_of_single_classifier(classifier_dict, input_csv_file_name):
 			if len(line) != 6:
 				raise CSVFormatError(input_csv_file_name)
 			
-			if classification_dict[line_index]['top_class'] == line[0]:
+			if classifier_dict[line_index]['top_class'] == line[0]:
 				correct_classification += 1	
 	
 		return (correct_classification / (line_index + 1))
@@ -366,15 +366,15 @@ def compute_average_confidence_of_single_classifier(classifier_dict, input_csv_f
 			if len(line) != 6:
 				raise CSVFormatError(input_csv_file_name)
 			
-			if (line[0] == '4') and (classification_dict[line_index]['top_class'] == line[0]):
+			if (line[0] == '4') and (classifier_dict[line_index]['top_class'] == line[0]):
 				pos_count += 1
-				for class_info in classification_dict[line_index]['classes']:
+				for class_info in classifier_dict[line_index]['classes']:
 					if class_info['class_name'] == '4':
 						pos_confidence += class_info['confidence']
 	
-			if (line[0] == '0') and (classification_dict[line_index]['top_class'] == line[0]):
+			if (line[0] == '0') and (classifier_dict[line_index]['top_class'] == line[0]):
 				neg_count += 1
-				for class_info in classification_dict[line_index]['classes']:
+				for class_info in classifier_dict[line_index]['classes']:
 					if class_info['class_name'] == '0':
 						neg_confidence += class_info['confidence']			
 	
