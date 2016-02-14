@@ -146,8 +146,6 @@ def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 	params = {'language': 'en', 'name': 'Classifier ' + str(n)}
 	try:
 		training_file = open(csv_file, 'rb')
-		files = {'training_data': training_file, 'training_metadata':meta_file}
-		
 		response = requests.post(url, auth=(username, password), \
 		                         files=[('training_metadata', ('training.json', json.dumps(params))),('training_data', training_file)])
 		training_file.close()
@@ -164,7 +162,7 @@ def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 if __name__ == "__main__":
 	
 	### STEP 1: Convert csv file into two-field watson format
-        
+        '''
 	input_csv_name = '/u/cs401/A1/tweets/training.1600000.processed.noemoticon.csv'
 	#DO NOT CHANGE THE NAME OF THIS FILE
 	output_csv_name ='training_11000_watson_style.csv'	
@@ -180,7 +178,7 @@ if __name__ == "__main__":
 	subset = [500, 2500, 5000]
 	for n_lines_to_extract in subset:
                 extract_subset_from_csv_file(output_csv_name,n_lines_to_extract)
-	
+	'''
 	### STEP 3: Create the classifiers using Watson
 	
 	#TODO: Create all 11 classifiers using the csv files of the subsets produced in 
