@@ -143,7 +143,7 @@ def classify_single_text(username,password,classifier_id,text):
 		result = requests.post(url, auth=(username, password), json={'text': text})
 		classification = ast.literal_eval(result.text)
 		classification.pop('url')
-		classification.pop('text')
+		#classification.pop('text')
 		classification.pop('classifier_id')
 		return classification
 			
@@ -310,7 +310,7 @@ def compute_accuracy_of_single_classifier(classifier_dict, input_csv_file_name):
 		for line in reader:   # iterates the rows of the file in orders
 			if len(line) != 6:
 				raise CSVFormatError(input_csv_file_name)
-			print(classifier_dict[line_index]['top_class'], "<----->", line[0])
+			print(classifier_dict[line_index]['top_class'], "<----->", line[0], "\n", classifier_dict[line_index]['text'])
 			if classifier_dict[line_index]['top_class'] == line[0]:
 				correct_classification += 1	
 			line_index += 1
