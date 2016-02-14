@@ -303,13 +303,13 @@ def compute_accuracy_of_single_classifier(classifier_dict, input_csv_file_name):
 	
 	#TODO: fill in this function
 	
-	with open(input_csv_name, 'rb') as csvfile:
+	with open(input_csv_file_name, 'rb') as csvfile:
 		reader = csv.reader(csvfile)   # opens the csv file
 		line_index = 0
 		correct_classfication = 0
 		for line in reader:   # iterates the rows of the file in orders
 			if len(line) != 6:
-				raise CSVFormatError(input_csv_name)
+				raise CSVFormatError(input_csv_file_name)
 			
 			if classification_dict[line_index]['top_class'] == line[0]:
 				correct_classification += 1	
@@ -354,7 +354,7 @@ def compute_average_confidence_of_single_classifier(classifier_dict, input_csv_f
 	
 	#TODO: fill in this function
 	
-	with open(input_csv_name, 'rb') as csvfile:
+	with open(input_csv_file_name, 'rb') as csvfile:
 		reader = csv.reader(csvfile)   # opens the csv file
 		line_index = 0
 		neg_confidence = 0
@@ -364,7 +364,7 @@ def compute_average_confidence_of_single_classifier(classifier_dict, input_csv_f
 
 		for line in reader:   # iterates the rows of the file in orders
 			if len(line) != 6:
-				raise CSVFormatError(input_csv_name)
+				raise CSVFormatError(input_csv_file_name)
 			
 			if (line[0] == '4') and (classification_dict[line_index]['top_class'] == line[0]):
 				pos_count += 1
