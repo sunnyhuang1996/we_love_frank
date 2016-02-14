@@ -16,7 +16,7 @@ import csv
 import requests
 from requests.auth import HTTPBasicAuth
 requests.packages.urllib3.disable_warnings()
-from json import dumps
+import json
 import sys
 
 
@@ -95,8 +95,9 @@ def extract_subset_from_csv_file(input_csv_file, n_lines_to_extract, output_file
                 
                 for line in csvfile.readlines():   
                         if line_count in test_data_set:
-                                output_file.write(" ".join(line.split()) + "\n")  #write info, class to csv
-                                line_count += 1
+				print(line_count)
+				output_file.write(" ".join(line.split()) + "\n")  #write info, class to csv
+				line_count += 1
                         else:
                                 continue
                 csvfile.close()
@@ -140,19 +141,15 @@ def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 	#	or if the input csv file does not exist or cannot be read.
 	#
 	
-	url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/10D41B-nlc-1"
+	url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers"
 
 	csv_file = input_file_prefix+str(n)+'.csv'
-	
-	metadata = {"language":"en","name":"Classifier " + str(n)}
-	meta_file = dumps(metadata)
+	params = {'language': 'en', 'name': 'Classifier ' + str(n)}
 	try:
 		training_file = open(csv_file, 'rb')
-		
-		files = {'training_data': training_file, 'training_metadata':meta_file}
-		response = requests.post(url, auth=(username, password), files=files)
+		response = requests.post(url, auth=(username, password), \
+		                         files=[('training_metadata', ('training.json', json.dumps(params))),('training_data', training_file)])
 		training_file.close()
-                
 	except IOError:
 		print ("Could not read file:", csv_file)
 		sys.exit()
@@ -165,6 +162,7 @@ def create_classifier(username, password, n, input_file_prefix='ibmTrain'):
 	
 if __name__ == "__main__":
 	
+	subset = [500, 2500, 5000]
 	### STEP 1: Convert csv file into two-field watson format
         
 	input_csv_name = '/u/cs401/A1/tweets/training.1600000.processed.noemoticon.csv'
@@ -179,7 +177,7 @@ if __name__ == "__main__":
 	#
 	# you should make use of the following function call:
 	#
-	subset = [500, 2500, 5000]
+	
 	for n_lines_to_extract in subset:
                 extract_subset_from_csv_file(output_csv_name,n_lines_to_extract)
 	
@@ -191,8 +189,8 @@ if __name__ == "__main__":
 	#
 	# you should make use of the following function call
 
-	username = "5946518f-f870-4f75-be57-baa2ca0f4f89"
-	password = "MZ8VMedaeStu"
+	username = '5946518f-f870-4f75-be57-baa2ca0f4f89'
+	password = 'MZ8VMedaeStu'
 
 	for n in subset:
                 create_classifier(username, password, n, input_file_prefix='ibmTrain')
