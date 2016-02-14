@@ -142,7 +142,6 @@ def classify_single_text(username,password,classifier_id,text):
 		url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/" + classifier_id + "/classify"
 		result = requests.post(url, auth=(username, password), json={'text': text})
 		classification = ast.literal_eval(result.text)
-		print(classification)
 		classification.pop('url')
 		classification.pop('text')
 		classification.pop('classifier_id')
@@ -407,6 +406,11 @@ if __name__ == "__main__":
 	'''
 	testing_csv = '/u/cs401/A1/tweets/testdata.manualSUBSET.2009.06.14.csv'
 	classifier_dict = classify_all_texts(username,password,testing_csv)	
+	classifier_list = ["c7fa49x23-nlc-998","c7e487x21-nlc-1079"]
+	#classifier_list = get_classifier_ids(username,password)
+	for classifier in classifier_list:
+		accuracy = compute_accuracy_of_single_classifier(classifier_dict, testing_csv)
+		print(accuracy)
 	
 	'''
 	for classifier in classifier_id_list:
