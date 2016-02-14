@@ -409,7 +409,7 @@ if __name__ == "__main__":
 	classifier_list = ["c7fa49x23-nlc-998","c7e487x21-nlc-1079"]
 	#classifier_list = get_classifier_ids(username,password)
 	for classifier in classifier_list:
-		accuracy = compute_accuracy_of_single_classifier(classifier_dict, testing_csv)
+		accuracy = compute_accuracy_of_single_classifier(classifier_dict[classifier], testing_csv)
 		print(accuracy)
 	
 	'''
