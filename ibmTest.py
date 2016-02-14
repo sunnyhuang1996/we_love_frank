@@ -250,6 +250,7 @@ def classify_all_texts(username,password,input_csv_name):
 	
 	classification_dict = dict()
 	classifier_list = ["c7fa49x23-nlc-998","c7e487x21-nlc-1079"]
+	classification_dict[classifier] = list()
 	'''
 	classifier_list = get_classifier_ids(username,password)
 	for classifier in classifier_list:
