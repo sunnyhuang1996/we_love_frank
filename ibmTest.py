@@ -38,12 +38,14 @@ def get_classifier_ids(username="5946518f-f870-4f75-be57-baa2ca0f4f89",password=
         try:
 		url = 'https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers'
 		result = requests.get(url, auth=(username, password))
+		print(result.text)
 		classfier_list = result.text['classifiers']
 		return_list = []
 		for classifier in classifier_list:
 			return_list.append(classifier['classifier_id'])
 	except:
-		raise Exception("classifiers call fialed, HTTP: %d" % response.status_code)
+		raise Exception("classifiers call fialed, HTTP: %d" % result.status_code)
+	return return_list
 
 
 def assert_all_classifiers_are_available(username, password, classifier_id_list):
@@ -65,14 +67,12 @@ def assert_all_classifiers_are_available(username, password, classifier_id_list)
 	#
 	
 	#TODO: Fill in this function
-	'''
+	
 	for claf in classifier_id_list:
-                try:
-                        url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/" + claf
-                        r = requests.get('https://api.github.com/events')
-                        r.json()
-                
-	'''
+		
+		url = "https://gateway.watsonplatform.net/natural-language-classifier/api/v1/classifiers/" + claf
+		r = requests.get(url)
+		r.json()
 	return
 
 def classify_single_text(username,password,classifier_id,text):
