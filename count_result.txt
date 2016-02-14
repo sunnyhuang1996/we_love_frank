@@ -1,0 +1,457 @@
+<A=0>
+
+[1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6.0, 3.5, 1]
+Wizbeff/NN I/PRP wanna/VB go/VB record/NN shopping/VBG today/NN !/.
+
+<A=0>
+
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 8.0, 4.857142857142857, 1]
+staciehays/NNS (Sad/NN face)/NN i/NN would/MD bring/VB you/PRP one/CD
+
+<A=0>
+
+[0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 1, 0, 8.0, 4.25, 1]
+Ca/MD n't/RB get/VB out/IN of/IN bed/VBN today/NN
+
+<A=0>
+
+[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 7.0, 2.5, 1]
+i/NN have/VBP to/TO go/VB feed/VBN Herman/NNP in/IN a/DT minute/NN ./.
+
+and/CC then/RB clean/JJ my/PRP$ room/NN ./.
+
+then/RB let/VB herman/NN out/IN ./.
+
+pretty/RB much/JJ what/WP i/NN do/VBP every/DT morning/VBG ./.
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 7.25, 3.64, 4]
+Stuck/VBN at/IN work/NN on/IN an/DT absolutely/RB gorgeous/JJ Saturday/NNP ./.
+
+This/DT is/VBZ so/RB unfair/JJ
+
+<A=0>
+
+[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 6.5, 4.583333333333333, 2]
+Rain/NNP ,/, rain/NN go/VB away/RB !/.
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 6.0, 3.5, 1]
+sitting/VBG in/IN an/DT apartment/NN in/IN san/NN francisco/NN and/CC wishing/VBG i/NN was/VBD at/IN home/NN
+
+<A=0>
+
+[1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 13.0, 4.153846153846154, 1]
+Just/RB so/RB you/PRP all/DT know/NN ,/, it/PRP looks/VBZ as/IN if/IN Mikeyy/NN 's/POS back/RB
+
+<A=0>
+
+[0, 2, 1, 0, 0, 0, 1, 0, 0, 0, 0, 2, 0, 2, 0, 3, 0, 13.0, 3.1666666666666665, 1]
+Dannymcfly/RB Jonesy/NN ?/.
+
+McFLY/NN MUST/MD come/VB to/TO Germany/NNP ./.
+
+when/WRB you/PRP love/NN Amsterdam/NNP you/PRP '/POS ll/NN love/NN Germany/NNP too/RB ./.
+
+We/PRP '/POS re/NN waiting/VBG for/IN you/PRP !please/VB tweet/NN back/RB
+
+<A=0>
+
+[0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 7.25, 4.541666666666667, 4]
+I/PRP '/POS ve/NN totally/RB forgotten/VBN that/IN I/PRP have/VBP a/DT Twitter/NN account/NN
+
+<A=0>
+
+[2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 1, 0, 11.0, 4.3, 1]
+i/NN '/POS m/NN never/RB guna/NN be/VB able/JJ to/TO give/VB up/IN on/IN you/PRP ,/, even/RB though/IN i/NN have/VBP no/DT chance/NN of/IN getting/VBG the/DT old/JJ '/POS us/PRP '/POS back..so/CD please/VB do/VBP n't/RB push/VB me/PRP away/RB anymore/RB
+
+<A=0>
+
+[2, 2, 1, 0, 0, 0, 1, 0, 0, 0, 0, 5, 0, 4, 0, 2, 0, 34.0, 3.21875, 1]
+writing/VBG a/DT paper/NN all/DT day/NN
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 5.0, 3.8, 1]
+Poor/NNP cubby/NN .../: he/PRP got/VBD called/VBN in/IN today/NN to/TO work/NN at/IN the/DT library/NN ./.
+
+<A=0>
+
+[0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 1, 4, 1, 0, 0, 1, 0, 14.0, 3.75, 1]
+Need/VB some/DT coffee/NN ./.
+
+Ca/MD n't/RB go/VB to/TO Starbucks/NNS until/IN the/DT shower/NN is/VBZ over/IN ./.
+
+<A=0>
+
+[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0, 7.5, 3.642857142857143, 2]
+just/RB woke/VBD up/IN ,/, ughhh/NN it/PRP 's/POS too/RB early/RB ./.
+
+<A=0>
+
+[0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 3, 0, 1, 0, 10.0, 3.25, 1]
+lala36079/NN I/PRP know/VB !/.
+
+I/PRP crashed/VBD as/IN soon/RB as/IN I/PRP got/VBD off/IN the/DT phone/NN with/IN you/PRP ./.
+
+<A=0>
+
+[2, 2, 1, 0, 2, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 8.5, 3.466666666666667, 2]
+DaddyCasual/JJ I/PRP feel/VB terrible/JJ I/PRP '/POS ll/NN buy/VB you/PRP a/DT new/JJ one/CD x/NN
+
+<A=0>
+
+[2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13.0, 3.4166666666666665, 1]
+hates/VBZ the/DT rain/NN ./.
+
+i/NN wish/VBP i/NN was/VBD in/IN jersey/NN right/NN now/RB
+
+<A=0>
+
+[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 6.0, 3.3636363636363638, 2]
+Sandy/NNP got/VBD a/DT sitter/NN for/IN thisafternoon/NN ./.
+
+but/CC all/DT festivals/NNS are/VBP rained/VBD out/IN .../: no/DT Crawfish/NN ,/, Green/NNP beer/NN or/CC Wild/NNP Game/NN BBQ/NN today/NN ./.
+
+<A=0>
+
+[1, 0, 0, 2, 1, 0, 1, 0, 0, 0, 1, 6, 2, 0, 0, 0, 1, 12.5, 4.523809523809524, 2]
+dremin/NN I/PRP want/VBP to/TO find/VB a/DT Twitterific/NN alternative/NN ,/, but/CC not/RB many/JJ sit/VB on/IN the/DT menu/NN bar/NN and/CC leave/VB my/PRP$ dock/NN uncluttered/JJ ./.
+
+<A=0>
+
+[2, 1, 2, 2, 0, 0, 1, 0, 0, 0, 0, 6, 0, 1, 0, 3, 0, 23.0, 4.285714285714286, 1]
+skimud/NN Sorry/JJ Upside:/NN weather/NN says/VBZ snow/NN all/DT day/NN today/NN in/IN Georgetown/NNP CO/NNP ,/, but/CC clear/JJ about/IN 6AM/NN tomorrow/NN &/CC then/RB partly/RB cloudy.Have/CD good/JJ day/NN !/.
+
+<A=0>
+
+[0, 0, 1, 2, 0, 0, 1, 1, 0, 0, 0, 9, 2, 2, 0, 1, 1, 25.0, 4.695652173913044, 1]
+stefinraleigh/NN Maybe/RB it/PRP 's/POS all/DT the/DT pollen/NN in/IN Raleigh/NNP rt/NN now.I/CD '/POS ve/NN been/VBN waking/VBG up/IN w/IN a/DT headache/NN evry/NN day/NN 4/NN a/DT wk/NN ./.
+
+Exced/VBN ./.
+
+Migraine/NN not/RB helping/VBG !/.
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 10.333333333333334, 3.7857142857142856, 3]
+Off/IN to/TO work/NN with/IN a/DT major/JJ headache/NN
+
+<A=0>
+
+[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.0, 3.857142857142857, 1]
+its/PRP$ so/RB nice/JJ out/IN and/CC I/PRP '/POS m/NN chained/VBD to/TO my/PRP$ school/NN books/NNS ./.
+
+<A=0>
+
+[2, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0, 1, 0, 14.0, 3.25, 1]
+shirlyhardjono/NN sayang/NN I/PRP miss/VB you/PRP too/RB hope/NN I/PRP can/MD talk/VB to/TO you/PRP sooon/NN !!/.
+
+<A=0>
+
+[2, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 1, 0, 3, 0, 14.0, 4.076923076923077, 1]
+8am/NN walks/VBZ at/IN the/DT beach/NN ./.
+
+im/NN so/RB tired/VBN ./.
+
+BUT/CC oh/UH well/RB ./.
+
+helloo/NN breakfast/NN after/IN ./.
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 4.5, 4.0, 4]
+Been/VBN up/IN 15min/NN ./.
+
+already/RB having/VBG a/DT bad/JJ day/NN
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4.5, 3.875, 2]
+is/VBZ falling/VBG asleep/RB and/CC the/DT extra/JJ large/JJ can/MD of/IN Rockstar/NN wo/MD n't/RB help/VB me/PRP
+
+<A=0>
+
+[1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 14.0, 3.6, 1]
+cedar/NN falls/VBZ are/VBP looking/VBG for/IN therapists/NNS ,/, if/IN only/RB i/NN could/MD drive/NN !!!id/NN love/NN to/TO work/NN there/EX .../:
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 1, 0, 2, 0, 18.0, 4.1875, 1]
+BrianWellsMD/NN something/VBG like/IN that/IN .../: btw/NN ,/, we/PRP should/MD have/VBP met/VBD up/IN at/IN NFG/NN last/JJ night/NN ./.
+
+I/PRP realized/VBD I/PRP did/VBD n't/RB have/VBP your/PRP$
+
+<A=0>
+
+[3, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 12.0, 3.909090909090909, 2]
+Konstpaus/NNS you/PRP '/POS re/NN making/VBG me/PRP hungry/JJ !/.
+
+<A=0>
+
+[2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 8.0, 4.666666666666667, 1]
+MarkBrooke/NN I/PRP '/POS m/NN sorry/JJ Mark/NNP ,/, I/PRP have/VBP 2/NN shoots/VBZ today/NN ./.
+
+Any/DT luck/NN ?!???/.
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.0, 3.75, 2]
+UFC/NN 97/NN is/VBZ gonna/VBG to/TO be/VB spectacular/JJ !Wish/VB I/PRP could/MD be/VB in/IN Montreal/JJ right/NN now/RB .../: ugh/NN ,/, stupid/JJ exams/NNS .../: WAR/NNP Silva/NNP !!WAR/NNP Shogun/NNP !!/.
+
+<A=0>
+
+[1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2, 5, 4, 1, 0, 0, 3, 25.0, 4.190476190476191, 1]
+chamila/NN aiyo/NN !chaa/NN max../CD I/PRP was/VBD waiting/VBG for/IN IPL/NN matches/VBZ ../.
+
+<A=0>
+
+[1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 1, 11.0, 4.2, 1]
+When/WRB I/PRP tranferred/VBN kbcafe.com/CD to/TO GoDaddy/NN ,/, Network/NNP Solutions/NNPS netsolcares/NNS immediately/RB erased/VBN the/DT DNS/NN settings/NNS on/IN the/DT NS/NNP causing/VBG an/DT outage/NN
+
+<A=0>
+
+[1, 0, 2, 0, 2, 0, 1, 0, 0, 0, 0, 4, 3, 1, 1, 2, 1, 21.0, 5.380952380952381, 1]
+Headphones/NNS broke/VBD damn/JJ .../: and/CC what/WP to/TO do/VBP ?/.
+
+;/: ((/NN
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5.5, 4.285714285714286, 2]
+
+olafsearson/NN Sky/NNP Sports/NNPS on/IN laptop/NN .../: seems/VBZ to/TO be/VB about/IN 5/NN mins/NNS behind/IN ./.
+
+Wife/NN watching/VBG Murray/NNP on/IN TV/NN
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 9.5, 4.411764705882353, 2]
+patlike/NN Brutal/JJ Legend/NNP not/RB quite/RB the/DT megaton/NN reveal/VB we/PRP were/VBD both/DT hoping/VBG for/IN from/IN wossy/NN ,/, eh/UH Pat/NNP ?/.
+
+<A=0>
+
+[1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 3, 2, 2, 0, 0, 0, 19.0, 4.470588235294118, 1]
+I/PRP hate/VBP my/PRP$ life/NN ./.
+
+Why/WRB does/VBZ school/NN exist/VB in/IN my/PRP$ life.3/CD days/NNS .../:
+
+<A=0>
+
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0, 1, 0, 0, 7.0, 3.230769230769231, 2]
+im/NN SO/RB lonely/RB !!!!!/.
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 2, 0, 4.0, 3.3333333333333335, 1]
+Sorry/JJ ,/, an/DT unexpected/JJ condition/NN has/VBZ occurred/VBD which/WDT is/VBZ preventing/VBG Google/NN Reader/NNP from/IN fulfilling/VBG the/DT request/NN ./.
+
+<A=0>
+
+[0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 3, 1, 0, 1, 0, 0, 16.0, 6.428571428571429, 1]
+Not/RB really/RB ready/JJ to/TO go/VB home/NN
+
+<A=0>
+
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 1, 0, 6.0, 3.6666666666666665, 1]
+vickie_allport/NN its/PRP$ not/RB broken/VBN !/.
+
+it/PRP 's/POS fine/JJ !/.
+
+it/PRP 's/POS just/RB leaking/VBG oil/NN ./.
+
+it/PRP 's/POS supposed/VBN to/TO leak/NN a/DT bit/NN but/CC yeah/UH
+
+<A=0>
+
+[0, 0, 2, 1, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 6.0, 3.5, 4]
+Started/VBN ethics/NNS again/RB ,/, realised/VBN I/PRP did/VBD it/PRP wrong/JJ But/CC I/PRP know/VB how/WRB to/TO write/VB it/PRP all/DT I/PRP '/POS m/NN just/RB not/RB best/JJS pleased/VBN about/IN it/PRP :/:
+
+<A=0>
+
+[3, 0, 3, 1, 4, 0, 1, 1, 0, 0, 0, 2, 0, 3, 1, 0, 0, 27.0, 3.625, 1]
+did/VBD n't/RB beat/VB the/DT rain/NN to/TO downtown/NN
+
+<A=0>
+
+[0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 7.0, 3.25, 1]
+InnerSanctumEU/NN Did/VBD you/PRP guys/NNS see/VB that/IN mmo-champion/NN are/VBP wiping/VBG their/PRP$ Hall/NNP of/IN Fame/NNP as/IN Freya/NNP (+Thorim/NN and/CC General)/NN is/VBZ getting/VBG made/VBN harder/JJR ?/.
+
+<A=0>
+
+[1, 2, 1, 1, 2, 0, 0, 0, 0, 0, 0, 5, 3, 0, 0, 3, 0, 23.0, 4.695652173913044, 1]
+Thinks/VBZ its/PRP$ just/RB unfair/JJ
+
+<A=0>
+
+[0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 4.0, 4.75, 1]
+Too/RB much/JJ champagne/NN last/JJ night/NN most/RBS expensive/JJ hangover/NN in/IN a/DT LONG/JJ time/NN !/.
+
+<A=0>
+
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 2, 0, 0, 1, 13.0, 4.75, 1]
+Bus/NNS seat/NN to/TO myself/PRP
+
+<A=0>
+
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 4.0, 3.75, 1]
+Worked/VBD for/IN just/RB enough/RB time/NN to/TO hear/VB leicester/NN score/NN at/IN Southend/NN one/CD of/IN those/DT days/NNS I/PRP think/VBP
+
+<A=0>
+
+[2, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 5, 0, 2, 0, 1, 0, 17.0, 4.294117647058823, 1]
+Stuck/VBN at/IN curledge/NN when/WRB i/NN just/RB quite/RB frankly/RB want/VBP to/TO go/VB home/NN ./.
+
+Still/RB in/IN a/DT bad/JJ mood/NN xx/NN
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 9.5, 3.611111111111111, 2]
+Well/UH ,/, activated/VBN my/PRP$ Facebook/NN account/NN again/RB .../: felt/VBD lonely/RB
+
+<A=0>
+
+[1, 0, 0, 0, 2, 0, 1, 0, 0, 0, 1, 2, 0, 1, 0, 2, 0, 10.0, 5.625, 1]
+watching/VBG the/DT harry/NN kalas/NNS tribute/NN on/IN phillies.com/CD miss/VB you/PRP harry/VB
+
+<A=0>
+
+[0, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 10.0, 4.818181818181818, 1]
+A/DT whole/JJ week/NN of/IN the/DT house/NN to/TO myself/PRP ./.
+
+God/NNP damn/JJ I/PRP need/VBN to/TO move/NN out/IN
+
+<A=0>
+
+[1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 8.0, 3.2666666666666666, 2]
+IzzyJ_Is_Here/NN hmmm/UH yes/UH especially/RB when/WRB I/PRP have/VBP a/DT hard/JJ time/NN with/IN the/DT block/NN button/NN I/PRP do/VBP n't/RB wanna/VB be/VB mean/VB !/.
+
+<A=0>
+
+[3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 2, 1, 2, 0, 21.0, 3.4782608695652173, 1]
+jimmywalker/NN The/DT ability/NN to/TO write/VB scripts/NNS to/TO integrate/VB with/IN twitter/NN is/VBZ one/CD advantage/NN ,/, but/CC really/RB it/PRP just/RB shows/VBZ how/WRB much/JJ of/IN a/DT geek/NN I/PRP am/VBP
+
+<A=0>
+
+[1, 0, 2, 1, 0, 0, 1, 0, 0, 0, 0, 6, 0, 2, 1, 2, 0, 26.0, 4.32, 1]
+mcunclebuck/NN how/WRB sad/JJ !i/NN hope/NN u/PRP feel/VB better/JJR !/.
+
+<A=0>
+
+[0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1, 2, 0, 9.0, 4.125, 1]
+snorrick/NN yea/NN ,/, I/PRP was/VBD wearing/VBG my/PRP$ oldest/JJS most/RBS worn/VBN out/IN pair/NN ./.
+
+I/PRP REALLY/NNP need/VBN to/TO mow/VB my/PRP$ grass/NNS today/NN ,/, but/CC I/PRP do/VBP n't/RB think/VBP I/PRP '/POS ll/NN be/VB up/IN to/TO it/PRP now/RB
+
+<A=0>
+
+[4, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 3, 1, 1, 0, 2, 1, 17.5, 3.125, 2]
+Ok/NNP battery/NN almost/RB dead/JJ ./.
+
+Need/VB to/TO stop/VB twittering/VBG and/CC watching/VBG scores/NNS ./.
+
+<A=0>
+
+[0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6.5, 5.090909090909091, 2]
+yummit/NN thanks../CD a/DT bit/NN better/JJR now/RB ,/, but/CC still/RB ../.
+
+<A=0>
+
+[0, 0, 2, 1, 0, 0, 1, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 10.0, 4.125, 1]
+start/VB H.W/CD .../: noooooooooooo/NN tomorrow/NN wo/MD got/VBD back/RB to/TO school/NN !!boo/VB hoo/NN !/.
+
+:O/NN
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7.0, 4.0, 2]
+Nuff55/NN wow/NN ,/, thats/NNS really/RB cool/JJ ./.
+
+i/NN need/VBN to/TO do/VBP the/DT opposite/JJ of/IN u/PRP !i/NN need/VBN to/TO gain/NN weight/NN
+
+<A=0>
+
+[0, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 1, 0, 10.0, 3.5555555555555554, 2]
+cutestmidget/NN Well/UH thanks/NNS for/IN the/DT encouragment/NN ./.
+
+I/PRP lost/VBD to/TO the/DT only/RB good/JJ guy/NN in/IN my/PRP$ court/NN ./.
+
+Rooting/VBG him/PRP on/IN to/TO win/VB our/PRP$ whole/JJ division/NN ./.
+
+<A=0>
+
+[1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.0, 4.291666666666667, 3]
+LunaEclipse/NN I/PRP think/VBP I/PRP '/POS m/NN going/VBG to/TO be/VB in/IN Milwaukee/NNP during/IN the/DT game/NN -/: I/PRP can/MD watch/VB it/PRP from/IN my/PRP$ phone/NN though/IN and/CC still/RB harass/VB you/PRP ;)/NN
+
+<A=0>
+
+[5, 2, 2, 1, 0, 1, 0, 0, 1, 0, 0, 4, 1, 1, 0, 2, 0, 26.0, 4.217391304347826, 1]
+ughhh/NN I/PRP dont/NN wannna/NN gooo/NN to/TO work/NN
+
+<A=0>
+
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 1, 0, 7.0, 3.7142857142857144, 1]
+her/PRP$ performance/NN was/VBD pretty/RB poor/JJ
+
+<A=0>
+
+[0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 5.0, 5.4, 1]
+Off/IN to/TO work/NN on/IN a/DT beautiful/JJ Saturday/NNP morning/VBG
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 8.0, 4.5, 1]
+Ready/JJ to/TO get/VB to/TO work/NN outside/IN on/IN this/DT gorgeous/JJ day/NN .../: raking/VBG ,/, staining/VBG our/PRP$ patio/NN table/NN ,/, cleaning/VBG up/IN the/DT yard/NN ./.
+
+Colder/JJR temps/NNS tomorrow/NN
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 13.0, 4.681818181818182, 2]
+Good/JJ party/NN last/JJ nite/NN !!/.
+
+Shoutout/NN to/TO all/DT the/DT ppl/NN responible/NN for/IN golden/JJ explosion../CD Hoping/VBG for/IN round/NN 2/NN ./.
+
+2nite/NN ./.
+
+Stuck/VBN at/IN wrk/NN until/IN 630/NN ./.
+
+<A=0>
+
+[0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 1, 6.75, 4.434782608695652, 4]
+Bruno43/NN I/PRP want/VBP some/DT too/RB !!!/.
+
+That/DT sounds/VBZ so/RB good/JJ !/.
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 5.5, 3.888888888888889, 2]
+Is/VBZ Loving/VBG NIN/NN today/NN !/.
+
+-/: shame/NN I/PRP cant/NN chill/NN with/IN a/DT beer/NN or/CC two/CD and/CC listen/VB to/TO them/PRP -/: have/VBP to/TO do/VBP dissertation/NN instead/RB ah/UH well/RB back/RB to/TO it/PRP !/.
+
+<A=0>
+
+[2, 0, 2, 2, 0, 0, 0, 0, 2, 0, 0, 5, 0, 3, 0, 1, 0, 15.5, 3.740740740740741, 2]
+is/VBZ trying/VBG to/TO catch/VB a/DT wounded/VBN bird/NN outdoor/JJ ,/, but/CC he/PRP 's/POS even/RB too/RB fast/RB for/IN me/PRP
+
+<A=0>
+
+[1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 3, 0, 0, 0, 17.0, 3.5, 1]
+I/PRP hate/VBP being/VBG sick/JJ I/PRP want/VBP to/TO be/VB out/IN enjoying/VBG my/PRP$ weekend/NN but/CC I/PRP know/VB I/PRP need/VBN to/TO sleep/VB this/DT off/IN ./.
+
+<A=0>
+
+[5, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.0, 3.3333333333333335, 1]
+would/MD love/VB to/TO write/VB w/IN somebody/NN !!in/IN germany/NN nobody/NN uses/VBZ twitter/NN !!so/RB sad/JJ
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 1, 0, 1, 0, 13.0, 4.3076923076923075, 1]
+too/RB tireddd/NN ./.
+
+<A=0>
+
+[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 3.0, 5.0, 1]
