@@ -259,7 +259,7 @@ def classify_all_texts(username,password,input_csv_name):
 			if len(line) != 6:
 				raise CSVFormatError(input_csv_name)
 			for classifier in classifier_list:
-				classification_dict[classifier].append(classify_single_text(username,password,classifier_id,line[-1]))
+				classification_dict[classifier].append(classify_single_text(username,password,classifier,line[-1]))
 			
         return classifier_list
 
