@@ -43,7 +43,7 @@ def get_classifier_ids(username="5946518f-f870-4f75-be57-baa2ca0f4f89",password=
 		for classifier in classifier_list:
 			return_list.append(classifier['classifier_id'])
 	except:
-		raise Exception("classifiers call fialed, HTTP: %d" % response.status_code)
+		raise Exception("classifiers call fialed, HTTP: %d" % result.status_code)
 	return return_list
 
 
