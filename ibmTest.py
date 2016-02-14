@@ -17,6 +17,7 @@ from requests.auth import HTTPBasicAuth
 import json
 import sys
 import ast
+import csv
 
 def get_classifier_ids(username,password):
 	# Retrieves a list of classifier ids from a NLClassifier service 
