@@ -1,4 +1,4 @@
-============= n=500 ==========================
+
 
 === Attribute Selection on all input data ===
 
@@ -34,8 +34,6 @@ Selected attributes: 19,2,14,6,9,7,8,3,1,5,4,17,16,20,18,11,10,15,12,13 : 20
 
 
 
-============= n=1000 ==========================
-
 === Attribute Selection on all input data ===
 
 Search Method:
@@ -69,8 +67,6 @@ Ranked attributes:
 Selected attributes: 19,2,5,14,7,9,8,4,3,6,1,17,16,20,18,11,10,15,12,13 : 20
 
 
-
-============= n=1500 ==========================
 
 === Attribute Selection on all input data ===
 
@@ -106,8 +102,6 @@ Selected attributes: 19,5,2,14,3,11,7,8,4,6,1,17,16,20,18,10,9,15,12,13 : 20
 
 
 
-============= n=2000 ==========================
-
 === Attribute Selection on all input data ===
 
 Search Method:
@@ -141,8 +135,6 @@ Ranked attributes:
 Selected attributes: 19,2,5,14,18,7,1,8,3,6,4,16,15,20,17,10,9,13,11,12 : 20
 
 
-
-============= n=2500 ==========================
 
 === Attribute Selection on all input data ===
 
@@ -178,8 +170,6 @@ Selected attributes: 19,2,5,14,18,7,1,3,10,4,15,20,16,17,9,11,12,6,8,13 : 20
 
 
 
-============= n=3000 ==========================
-
 === Attribute Selection on all input data ===
 
 Search Method:
@@ -213,8 +203,6 @@ Ranked attributes:
 Selected attributes: 19,2,14,5,18,1,7,3,13,10,4,15,20,16,17,9,11,6,8,12 : 20
 
 
-
-============= n=3500 ==========================
 
 === Attribute Selection on all input data ===
 
@@ -250,8 +238,6 @@ Selected attributes: 19,2,14,5,18,1,7,13,4,10,16,15,20,3,17,9,11,6,8,12 : 20
 
 
 
-============= n=4000 ==========================
-
 === Attribute Selection on all input data ===
 
 Search Method:
@@ -285,8 +271,6 @@ Ranked attributes:
 Selected attributes: 19,2,14,5,18,1,11,7,9,4,3,6,16,15,20,17,10,8,13,12 : 20
 
 
-
-============= n=4500 ==========================
 
 === Attribute Selection on all input data ===
 
@@ -322,8 +306,6 @@ Selected attributes: 19,2,14,5,18,1,11,7,9,3,4,15,6,16,20,17,10,8,13,12 : 20
 
 
 
-============= n=5000 ==========================
-
 === Attribute Selection on all input data ===
 
 Search Method:
@@ -343,8 +325,8 @@ Ranked attributes:
  0.001542    9 dash
  0.001347   11 ellipses
  0.001009    3 third_person_pronoun
- 0.000932   16 modern_slan_acronym
  0.000925    4 coordinating_conj
+ 0.0009     16 modern_slan_acronym
  0           6 future_tense_verb
  0          15 wh_word
  0          20 number_of_sentence
@@ -354,11 +336,9 @@ Ranked attributes:
  0          13 proper_noun
  0          12 common_noun
 
-Selected attributes: 19,2,14,5,18,1,7,9,11,3,16,4,6,15,20,17,10,8,13,12 : 20
+Selected attributes: 19,2,14,5,18,1,7,9,11,3,4,16,6,15,20,17,10,8,13,12 : 20
 
 
-
-============= n=5500 ==========================
 
 === Attribute Selection on all input data ===
 
@@ -379,7 +359,7 @@ Ranked attributes:
  0.001494    7 commas
  0.001492   11 ellipses
  0.000847    4 coordinating_conj
- 0.00083    16 modern_slan_acronym
+ 0.000806   16 modern_slan_acronym
  0.000796    3 third_person_pronoun
  0           6 future_tense_verb
  0          15 wh_word
@@ -391,10 +371,4 @@ Ranked attributes:
  0          12 common_noun
 
 Selected attributes: 19,2,14,5,18,1,9,7,11,4,16,3,6,15,20,17,10,8,13,12 : 20
-
-
-
-=======Comments=========================
-There are three features: Average length of tokens, second person pronoun and adverbs.
-I think provided all size of training dataset, these three features can provide most variation of data, which means they can capture most information about data and provide most information to classification. These three features can reduce entropy of the system most efficiently. Thus, they have most information gain. 
 
