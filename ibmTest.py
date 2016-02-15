@@ -93,16 +93,13 @@ def assert_all_classifiers_are_available(username,password,classifier_id_list):
 			result = requests.get(url, auth=(username, password))
 			#get the status for each classfier
 			classifier_status = str(json.loads(result.text)['status'])
-			#if classifier_status != 'Available':	
-				#raise NotAvailableError(classifier)
+			if classifier_status != 'Available':	
+				raise NotAvailableError(classifier)
 		
 		except requests.exceptions.RequestException as error:    # This is the correct syntax
 			print error
 			sys.exit(1)
 			
-		print(result.text)
-
-		
 	return
 
 def classify_single_text(username,password,classifier_id,text):
