@@ -60,39 +60,40 @@ def aggre_count(s, categories="all"):
 def assign_cate(s, category):
     '''determine which category of words is calling'''
     #if words
-    if category in ["FPP", "SPP", "TPP", "CSC", "DASH", "EL", "MSA"]:
-        return count_word(s,category)
+    if category in ["FPP", "SPP", "TPP", "CSC", "DASH", "MSA"]:
+        return count(s,category, post="/")
+    elif category=="EL":
+        return count(s, category)
     #if tag
     elif category in ["CC", "CO", "PA", "CN", "PN", "ADV", "WW", "PTV"]:
-        return count_type(s,category)
+        return count(s,category, pre="/", post=" ")
     #if future tense
     elif category=="FTV":
-        return (len(re.findall('going/VBG to/TO [a-zA-Z]+/VB', s)) + count_word(s,"FTV"))
+        return (len(re.findall('going/VBG to/TO [a-zA-Z]+/VB', s)) + count(s,"FTV", post="/"))
     elif category=="upper":
         sp = s.split(" ")
         return sum([(c.isupper() and c.index("/")>2) for c in sp])
     
-
+"""
 def count_word(s,category):
     '''
     count the total number of apperence of words in category in string s
     '''
-    if category=="EL":
-        return sum([s.count(word) for word in ca_dict[category]])
+
+    
     elif category=="MSA":
-        #return sum([s.count(word+"/") for word in ca_dict[category]]) + sum([s.count(word.upper()+"/") for word in ca_dict[category]])
         return sum([(s.upper()).count(word.upper() + "/") for word in ca_dict[category]])
-    else:
-        return sum([s.count(word+"/") for word in ca_dict[category]])
-        
+       
 
 def count_type(s, category):
     '''
     count the total number of apperence tags in category in string s
     '''
-    return sum([s.count("/"+tag+" ") for tag in ca_dict[category]])
-
- 
+    return sum([.count("/"+tag+" ") for tag in ca_dict[category]])
+"""
+    
+ def count(s, category, pre='', post=''):
+     return sum([(s.upper()).count(pre+word.upper()+post) for word in ca_dict[category]])
 
 if __name__ == '__main__':
     
