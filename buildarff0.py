@@ -65,7 +65,7 @@ def assign_cate(s, category):
     elif category=="EL":
         return count(s, category)
     elif category=="MSA":
-        sum([(s.upper()).count(word.upper()+"/") for word in ca_dict[category]])
+        sum([(s.upper()).count(word.upper()+"/") for word in ca_dict["MSA"]])
     #if tag
     elif category in ["CC", "CO", "PA", "CN", "PN", "ADV", "WW", "PTV"]:
         return count(s,category, pre="/", post=" ")
