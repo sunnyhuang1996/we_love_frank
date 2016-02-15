@@ -1,0 +1,6 @@
+Q3: Explore alternative classification methods to those used in Task 3. Explore different parameters that control those methods. Which parameters give the best empirical performance, and why? 
+
+For Naive Bayes, we used supervised discretization to process numeric attributes and increase
+accuracy from 55.9889% to 58.7744%. (i.e. java -cp /u/cs401/WEKA/weka.jar weka.classifiers.bayes.NaiveBayes -D -t train.arff -T test.arff)
+
+This is because numeric data in this case are discrete instead of continuous and we have large number of training data. Thus, it’s better to use discretization to learn distribution of data P(X|Y) instead of learning P(Y|X) directly. 

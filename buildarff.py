@@ -176,7 +176,7 @@ def main():
             char_token += len((only_alph.sub(' ', line)).split()) - past_num - futurn_num  #number of tokens (only char)
             num_char += len(only_alph.sub('', line))  #number only char in tweeter
 
-    if len(sys.argv) == 3: #if all data, write result for last tweeter, otherwise skip       
+    if len(sys.argv) == 3 or sys.argv[3]==5500: #if all data, write result for last tweeter, otherwise skip       
         avg_len_sentence = float(num_token)/num_sen
         avg_len_token = float(num_char)/char_token
         cal+=[avg_len_sentence, avg_len_token, num_sen]  #result

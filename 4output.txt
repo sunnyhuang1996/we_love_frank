@@ -1,10 +1,30 @@
-(267, 359)
+3. Compute accuracy for each classifier. That is, for each classification returned by each classifier, compare its value with the known class in the test data. For each classifier, compute the proportion of tweets that classified correctly and report these values in the file 4output.txt. You should manually add to that file a brief discussion on how these results differ from those in section 3.2.
 
-(271, 359)
+===== For n = 500 =========
+239 data out of 359 are classified correctly. The accuracy rate is 0.663889.
 
-(239, 359)
+===== For n = 2500 =========
+271 data out of 359 are classified correctly. The accuracy rate is 0.752778.
 
-{'c7e487x21-nlc-1080': 0.7416666666666667, 'c7fa49x23-nlc-998': 0.6638888888888889, 'c7e487x21-nlc-1079': 0.7527777777777778}
+===== For n = 5000 =========
+267 data out of 359 are classified correctly. The accuracy rate is 0.741667.
 
-{'c7e487x21-nlc-1080': (0.935904410823024, 0.12425672388347818), 'c7fa49x23-nlc-998': (0.9165887309961022, 0.12456575236995823), 'c7e487x21-nlc-1079': (0.9215881484943031, 0.12402599348695698)}
+
+In general, accuracy of IBM is higher than accuracy of WEKA. And accuracy for IBM is increasing at first then decreasing due to overfitting, while WEKA is decreasing at first then increasing. I think this difference is because of different training dataset chosen. 
+
+
+
+
+4. Compute the average confidence of the selected class over all correct and incorrect classifications,
+for each classifier. I.e., there should be 6 average confidence values – 3 classifiers by two classification
+outcomes. You can also add any observations you find interesting to 4output.txt, if you wish.
+
+
+                    500                     2500                  5000
+correct     0.9165887309961022       0.9215881484943031      0.935904410823024
+
+incorrect   0.12456575236995823      0.12402599348695698     0.12425672388347818
+
+
+Even though accuracy is increasing then decreasing as n increases, the confidence increase all the time. Also, confidence for correction and in correction can increase at the same time. 
 
