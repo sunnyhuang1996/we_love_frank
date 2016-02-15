@@ -1,10 +1,10 @@
-Last name: 
-First Name: 
-Student ID Number: 
-CDF login id: 
-Contact email address: 
-BlueMix credentials: username,password
-UG/Grad?: 
+Last name: Huang,   Fang
+First Name: Shanshan,   Tiantian
+Student ID Number: ,    1000919955
+CDF login id: g4sunny,  g5fangti
+Contact email address: sunny.huang@mail.utoronto.ca,   ailsa.fang@mail.utoronto.ca
+BlueMix credentials: username,password    5946518f-f870-4f75-be57-baa2ca0f4f89,  MZ8VMedaeStu
+UG/Grad?: UG
 
 By submitting this file, I declare that my electronic submission is my
 own work, and is in accordance with the University of Toronto Code of
