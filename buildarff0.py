@@ -60,12 +60,12 @@ def aggre_count(s, categories="all"):
 def assign_cate(s, category):
     '''determine which category of words is calling'''
     #if words
-    if category in ["FPP", "SPP", "TPP", "CSC", "DASH"]:#, "MSA"]:
+    if category in ["FPP", "SPP", "TPP", "CSC", "DASH"]:
         return count(s,category, post="/")
     elif category=="EL":
         return count(s, category)
     elif category=="MSA":
-        sum([(s.upper()).count(word.upper()+"/") for word in ca_dict["MSA"]])
+        return sum([(s.upper()).count(word.upper()+"/") for word in ca_dict["MSA"]])
     #if tag
     elif category in ["CC", "CO", "PA", "CN", "PN", "ADV", "WW", "PTV"]:
         return count(s,category, pre="/", post=" ")
