@@ -92,8 +92,8 @@ def count_type(s, category):
     return sum([.count("/"+tag+" ") for tag in ca_dict[category]])
 """
     
- def count(s, category, pre='', post=''):
-     return sum([(s.upper()).count(pre+word.upper()+post) for word in ca_dict[category]])
+def count(s, category, pre='', post=''):
+    return sum([(s.upper()).count(pre+word.upper()+post) for word in ca_dict[category]])
 
 if __name__ == '__main__':
     
