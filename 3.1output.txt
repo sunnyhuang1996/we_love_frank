@@ -1,78 +1,169 @@
 
-SMO
+Naive Bayes Classifier
 
-Kernel used:
-  Linear Kernel: K(x,y) = <x,y>
+                            Class
+Attribute                       0       4
+                            (0.5)   (0.5)
+==========================================
+first_person_pronoun
+  mean                        0.77  0.6548
+  std. dev.                 0.9575  0.8797
+  weight sum                  5499    5501
+  precision                      1       1
 
-Classifier for classes: 0, 4
+second_person_pronoun
+  mean                      0.2517  0.4677
+  std. dev.                 0.7702  1.0058
+  weight sum                  5499    5501
+  precision                      1       1
 
-BinarySMO
+third_person_pronoun
+  mean                      0.7052  0.6432
+  std. dev.                 0.9729  0.8977
+  weight sum                  5499    5501
+  precision                 1.2222  1.2222
 
-Machine linear: showing attribute weights, not support vectors.
+coordinating_conj
+  mean                      0.2448  0.2112
+  std. dev.                 0.4985  0.4652
+  weight sum                  5499    5501
+  precision                      1       1
 
-        -0.7765 * (normalized) first_person_pronoun
- +       3.5394 * (normalized) second_person_pronoun
- +       0.4329 * (normalized) third_person_pronoun
- +      -0.0768 * (normalized) coordinating_conj
- +      -2.3305 * (normalized) past_tense_verb
- +       0.3298 * (normalized) future_tense_verb
- +       2.5362 * (normalized) commas
- +       0.6667 * (normalized) colons_semi_colon
- +       2.9759 * (normalized) dash
- +      -0.5271 * (normalized) parentheses
- +      -0.4223 * (normalized) ellipses
- +       0.9351 * (normalized) common_noun
- +       1.159  * (normalized) proper_noun
- +      -1.9242 * (normalized) adverb
- +      -0.6821 * (normalized) wh_word
- +      -0.0124 * (normalized) modern_slan_acronym
- +       0.6296 * (normalized) word_all_in_upper_case
- +      -0.3507 * (normalized) average_length_sentence
- +      11.8271 * (normalized) average_length_token
- +       1.4276 * (normalized) number_of_sentence
- -       1.9644
+past_tense_verb
+  mean                      0.5474   0.362
+  std. dev.                 0.8846  0.7155
+  weight sum                  5499    5501
+  precision                 1.1667  1.1667
 
-Number of kernel evaluations: 3555238 (60.956% cached)
+future_tense_verb
+  mean                      0.0435  0.0453
+  std. dev.                 0.2092  0.2122
+  weight sum                  5499    5501
+  precision                      1       1
+
+commas
+  mean                      0.2422   0.266
+  std. dev.                 0.5866  0.6611
+  weight sum                  5499    5501
+  precision                 1.2857  1.2857
+
+colons_semi_colon
+  mean                      0.0167  0.0207
+  std. dev.                 0.1667  0.1667
+  weight sum                  5499    5501
+  precision                      1       1
+
+dash
+  mean                      0.0375  0.0626
+  std. dev.                 0.2269  0.2992
+  weight sum                  5499    5501
+  precision                    1.2     1.2
+
+parentheses
+  mean                      0.0011  0.0005
+  std. dev.                 0.1667  0.1667
+  weight sum                  5499    5501
+  precision                      1       1
+
+ellipses
+  mean                       0.166  0.1292
+  std. dev.                 0.4536  0.4002
+  weight sum                  5499    5501
+  precision                      1       1
+
+common_noun
+  mean                      2.5276  2.5377
+  std. dev.                 2.1723  2.1828
+  weight sum                  5499    5501
+  precision                      1       1
+
+proper_noun
+  mean                      0.2068  0.2374
+  std. dev.                 0.5602  0.6054
+  weight sum                  5499    5501
+  precision                      1       1
+
+adverb
+  mean                      0.7909  0.5744
+  std. dev.                 0.9843  0.8445
+  weight sum                  5499    5501
+  precision                      1       1
+
+wh_word
+  mean                      0.1038  0.0883
+  std. dev.                 0.3252  0.3054
+  weight sum                  5499    5501
+  precision                      1       1
+
+modern_slan_acronym
+  mean                      0.6328  0.6833
+  std. dev.                 0.8655  0.9369
+  weight sum                  5499    5501
+  precision                      1       1
+
+word_all_in_upper_case
+  mean                      0.1756  0.1874
+  std. dev.                  0.837  0.7278
+  weight sum                  5499    5501
+  precision                 1.0625  1.0625
+
+average_length_sentence
+  mean                     11.1517 10.3749
+  std. dev.                 6.2379  5.8614
+  weight sum                  5499    5501
+  precision                 0.3429  0.3429
+
+average_length_token
+  mean                      4.1304  4.4742
+  std. dev.                 0.9309   1.101
+  weight sum                  5499    5501
+  precision                 0.0361  0.0361
+
+number_of_sentence
+  mean                       1.477  1.5035
+  std. dev.                 0.7544    0.77
+  weight sum                  5499    5501
+  precision                      1       1
 
 
 
-Time taken to build model: 1.93 seconds
-Time taken to test model on training data: 0.21 seconds
+Time taken to build model: 0.14 seconds
+Time taken to test model on training data: 0.54 seconds
 
 === Error on training data ===
 
-Correctly Classified Instances        6792               61.7455 %
-Incorrectly Classified Instances      4208               38.2545 %
-Kappa statistic                          0.2349
-Mean absolute error                      0.3825
-Root mean squared error                  0.6185
-Relative absolute error                 76.5091 %
-Root relative squared error            123.7005 %
+Correctly Classified Instances        6529               59.3545 %
+Incorrectly Classified Instances      4471               40.6455 %
+Kappa statistic                          0.1871
+Mean absolute error                      0.4456
+Root mean squared error                  0.5039
+Relative absolute error                 89.115  %
+Root relative squared error            100.7721 %
 Total Number of Instances            11000     
 
 
 === Confusion Matrix ===
 
     a    b   <-- classified as
- 3637 1862 |    a = 0
- 2346 3155 |    b = 4
+ 2885 2614 |    a = 0
+ 1857 3644 |    b = 4
 
 
 === Error on test data ===
 
-Correctly Classified Instances         200               55.7103 %
-Incorrectly Classified Instances       159               44.2897 %
-Kappa statistic                          0.1123
-Mean absolute error                      0.4429
-Root mean squared error                  0.6655
-Relative absolute error                 88.5796 %
-Root relative squared error            133.1013 %
+Correctly Classified Instances         201               55.9889 %
+Incorrectly Classified Instances       158               44.0111 %
+Kappa statistic                          0.1165
+Mean absolute error                      0.4702
+Root mean squared error                  0.5194
+Relative absolute error                 94.0481 %
+Root relative squared error            103.872  %
 Total Number of Instances              359     
 
 
 === Confusion Matrix ===
 
    a   b   <-- classified as
-  85  92 |   a = 0
-  67 115 |   b = 4
+  75 102 |   a = 0
+  56 126 |   b = 4
 
