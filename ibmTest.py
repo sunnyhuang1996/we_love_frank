@@ -249,8 +249,7 @@ def classify_all_texts(username,password,input_csv_name):
 	
 	classification_dict = dict()
 	
-	classifier_list = ["c7fa49x23-nlc-998","c7e487x21-nlc-1079"]
-	#classifier_list = get_classifier_ids(username,password)
+	classifier_list = get_classifier_ids(username, password)
 	for classifier in classifier_list:
 		classification_dict[classifier] = list()
 	
@@ -310,12 +309,13 @@ def compute_accuracy_of_single_classifier(classifier_dict, input_csv_file_name):
 		for line in reader:   # iterates the rows of the file in orders
 			if len(line) != 6:
 				raise CSVFormatError(input_csv_file_name)
-			
+			#print(classifier_dict[line_index]['top_class'], "<----->", line[0], "\n", classifier_dict[line_index]['text'])
 			if classifier_dict[line_index]['top_class'] == line[0]:
 				correct_classification += 1	
 			line_index += 1
+		print (correct_classification, line_index)
 	
-		return (correct_classification / (line_index + 1))
+		return (float(correct_classification) / (line_index + 1))
 
 def compute_average_confidence_of_single_classifier(classifier_dict, input_csv_file_name):
 	# Given a list of "classifications" for a given classifier, compute the average 
@@ -358,29 +358,29 @@ def compute_average_confidence_of_single_classifier(classifier_dict, input_csv_f
 	with open(input_csv_file_name, 'rb') as csvfile:
 		reader = csv.reader(csvfile)   # opens the csv file
 		line_index = 0
-		neg_confidence = 0
-		neg_count = 0
-		pos_confidence = 0
-		pos_count = 0
+		correct_confidence = 0
+		correct_count = 0
+		incorrect_confidence = 0
+		incorrect_count = 0
 
 		for line in reader:   # iterates the rows of the file in orders
 			if len(line) != 6:
 				raise CSVFormatError(input_csv_file_name)
 			
-			if (line[0] == '4') and (classifier_dict[line_index]['top_class'] == line[0]):
-				pos_count += 1
+			if (classifier_dict[line_index]['top_class'] == line[0]):
+				correct_count += 1
 				for class_info in classifier_dict[line_index]['classes']:
-					if class_info['class_name'] == '4':
-						pos_confidence += class_info['confidence']
+					if class_info['class_name'] == classifier_dict[line_index]['top_class']:
+						correct_confidence += class_info['confidence']
 	
-			if (line[0] == '0') and (classifier_dict[line_index]['top_class'] == line[0]):
-				neg_count += 1
+			else:
+				incorrect_count += 1
 				for class_info in classifier_dict[line_index]['classes']:
-					if class_info['class_name'] == '0':
-						neg_confidence += class_info['confidence']
+					if class_info['class_name'] != classifier_dict[line_index]['top_class']:
+						incorrect_confidence += class_info['confidence']
 			line_index += 1
 	
-		return (pos_confidence / pos_count, neg_confidence / neg_count)
+		return (float(correct_confidence) / correct_count, float(incorrect_confidence) / incorrect_count)
 
 
 
@@ -392,28 +392,29 @@ if __name__ == "__main__":
 	
 	#STEP 1: Ensure all 3 classifiers are ready for testing
 	classifier_id_list = get_classifier_ids(username, password)
-	'''
-	classify_single_text(username,password,'c7fa49x23-nlc-998', 'i lam so in love with Bobby Flay... he is my favorite. RT @terrysimpson: @bflay you need a place in Phoenix. We have great peppers here!')
-	'''
+
 	#STEP 2: Test the test data on all classifiers
 	assert_all_classifiers_are_available(username, password, classifier_id_list)
 	#STEP 3: Compute the accuracy for each classifier
 	#STEP 4: Compute the confidence of each class for each classifier
 
-	'''
-	testing_csv = '/u/cs401/A1/tweets/testdata.manualSUBSET.2009.06.14.csv'
-	classifier_dict = classify_all_texts(username,password,testing_csv)
-	accuracy = compute_accuracy_of_single_classifier(classifier_dict, testing_csv)
-	print(accuracy)
-	'''
 	testing_csv = '/u/cs401/A1/tweets/testdata.manualSUBSET.2009.06.14.csv'
 	classifier_dict = classify_all_texts(username,password,testing_csv)	
-	classifier_list = ["c7fa49x23-nlc-998","c7e487x21-nlc-1079"]
-	#classifier_list = get_classifier_ids(username,password)
-	for classifier in classifier_list:
-		accuracy = compute_accuracy_of_single_classifier(classifier_dict[classifier], testing_csv)
-		print(accuracy)
+	classifier_list = get_classifier_ids(username,password)
 	
+	accuracy_list = dict()
+	for classifier in classifier_list:
+		accuracy_list[classifier] = compute_accuracy_of_single_classifier(classifier_dict[classifier], testing_csv)
+	
+	print(accuracy_list)
+	
+	
+	confidence_list = dict()
+	for classifier in classifier_list:
+		confidence_list[classifier] = compute_average_confidence_of_single_classifier(classifier_dict[classifier], testing_csv)
+	
+	print(confidence_list)	
+
 	'''
 	for classifier in classifier_id_list:
 		remove_classifier(username, password, classifier)
