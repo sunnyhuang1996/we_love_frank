@@ -80,7 +80,8 @@ def count_word(s,category):
     if category=="EL":
         return sum([s.count(word) for word in ca_dict[category]])
     elif category=="MSA":
-        return sum([s.count(word+"/") for word in ca_dict[category]]) + sum([s.count(word.upper()+"/") for word in ca_dict[category]])
+        #return sum([s.count(word+"/") for word in ca_dict[category]]) + sum([s.count(word.upper()+"/") for word in ca_dict[category]])
+        return sum([(s.upper()).count(word.upper() + "/") for word in ca_dict[category]])
     else:
         return sum([s.count(word+"/") for word in ca_dict[category]])
         
